@@ -1,2 +1,2 @@
-# advent-py
+# advent-py 🎄🐍
 Advent of Code in Python

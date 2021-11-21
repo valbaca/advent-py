@@ -1,4 +1,5 @@
 import re
+from functools import reduce
 from typing import AnyStr, Pattern
 
 
@@ -27,7 +28,7 @@ def lines(filename: AnyStr, parser=None, test=False):
     if filename.endswith(".py"):
         filename = _test_file(filename) if test else _in_file(filename)
     with open(filename, "r") as f:
-        xs = [line for line in f.readlines() if line]
+        xs = [line.strip() for line in f.readlines() if line and line.strip()]
         if parser:
             xs = list(map(parser, xs))
         return xs
@@ -59,3 +60,7 @@ def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> list[AnyStr]:
     :return: separated parts as ints (where possible)
     """
     return list(map(safe_atoi, split_on(s, regex)))
+
+
+def product(xs):
+    return reduce(lambda x, y: x * y, xs, 1)
