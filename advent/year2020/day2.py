@@ -1,13 +1,12 @@
-from collections import Counter
-
 from advent.elf import lines, septoi
+
+"""list.count is nice!"""
 
 
 def part1(xs):
     n = 0
     for mn, mx, c, s in xs:
-        counts = Counter(list(s))
-        if mn <= counts[c] <= mx:
+        if mn <= list(s).count(c) <= mx:
             n += 1
     print(n)
 
@@ -16,7 +15,7 @@ def part2(xs):
     n = 0
     for lo, hi, c, s in xs:
         cs = list(s)
-        if (cs[lo-1] == c) ^ (cs[hi-1] == c):
+        if (cs[lo - 1] == c) ^ (cs[hi - 1] == c):
             n += 1
     print(n)
 

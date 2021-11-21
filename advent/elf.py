@@ -1,11 +1,9 @@
 import re
 from functools import reduce
 from typing import AnyStr, Pattern
+"""An elf is Santa's little helper, so elf.py has helper functions!"""
 
-
-def howdy():
-    print("Howdy!")
-
+# IO-related
 
 def in_file(file):
     return file.replace(".py", ".txt")
@@ -40,6 +38,7 @@ def strip_lines(filename):
         arr = [line.strip() for line in f.readlines()]
     return arr
 
+# String related
 
 def split_on(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> list[AnyStr]:
     """
@@ -48,6 +47,7 @@ def split_on(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> list[AnyStr]:
     """
     return [split for split in re.split(regex, s) if split]
 
+# String conversions
 
 def safe_atoi(s: AnyStr):
     """Safe Ascii to Integer. If the string is an int, returns as an int; otherwise gives the string back"""

@@ -1,5 +1,10 @@
 from advent.elf import lines
 
+"""
+Straightforward. Setup IO helpers. Using __file__ is a cute way to get the input via naming conventions.
+It does mean the input is alongside the python file, but it's kind of easier that way.
+"""
+
 
 def part1(ints):
     set_ints = set(ints)

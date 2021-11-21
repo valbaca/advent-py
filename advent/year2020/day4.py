@@ -3,6 +3,24 @@ from typing import AnyStr
 
 from advent.elf import in_file, strip_lines
 
+"""
+Compared to the first few, this was a lot more involved; more tedious than challenging but
+does hit on several elements: parsing, converting, validation, regex.
+TIL:
+- str.join(delim, s) 
+  Thanks to JavaScript I can never remember where the join function is
+- re.split(r, s) and match and fullmatch
+  Drives me nuts that python doesn't have consistent spacing in naming, fullmatch vs full_match
+- `if` in list comprehension like a filter.
+  Lots of Advent questions have the pattern of:
+  lines -> parse -> map -> filter -> count
+  In Python pseudo-code:
+    len([line for line in lines if valid(parse(line))])
+  In Clojure pseudo-code:
+    (count (filter valid (map parse lines)))
+    (->> lines (map parse) (filter valid) count)
+- """
+
 
 def lines_to_passports(lines):
     # collect into arrays separated by the blank line
@@ -11,7 +29,7 @@ def lines_to_passports(lines):
         if line:
             passports[-1].append(line)
         else:
-            passports.append([]) # blank line = new passport
+            passports.append([])  # blank line = new passport
     # collect passports into a single string
     passports = [str.join(' ', arr) for arr in passports]
     # now we can take it apart and create objects out of it
@@ -38,9 +56,9 @@ def part1(lines):
 
 def valid_height(h: AnyStr):
     if h.endswith("cm"):
-        return int(h[:-2]) in range(150, 193 + 1)
+        return 150 <= int(h[:-2]) <= 193
     elif h.endswith("in"):
-        return int(h[:-2]) in range(59, 76 + 1)
+        return 59 <= int(h[:-2]) <= 76
     return False
 
 
