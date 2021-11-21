@@ -1,7 +1,9 @@
 import re
 from functools import reduce
 from typing import AnyStr, Pattern
+
 """An elf is Santa's little helper, so elf.py has helper functions!"""
+
 
 # IO-related
 
@@ -33,10 +35,22 @@ def lines(filename: AnyStr, parser=None, test=False):
 
 
 def strip_lines(filename):
-    arr = []
     with open(filename) as f:
         arr = [line.strip() for line in f.readlines()]
     return arr
+
+
+def lines_blank_grouped(filename):
+    """For problems where the lines of input are grouped by blank lines."""
+    orig_lines = strip_lines(filename)
+    groups = [[]]
+    for line in orig_lines:
+        if line:
+            groups[-1].append(line)
+        else:
+            groups.append([])  # blank line = new group
+    return groups
+
 
 # String related
 
@@ -46,6 +60,7 @@ def split_on(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> list[AnyStr]:
     Default split regex is any non-alphanumeric (including hyphen! careful with negative numbers)
     """
     return [split for split in re.split(regex, s) if split]
+
 
 # String conversions
 
