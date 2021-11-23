@@ -1,6 +1,6 @@
 import re
 
-from advent.elf import lines
+from advent.elf import read_lines
 
 """
 Given this was the first graph problem and one with such a "human" input, I was worried this would take a very long time
@@ -64,7 +64,7 @@ def count_bags(graph, top_color):
 
 
 def main():
-    inp = lines(__file__, parse)
+    inp = read_lines(__file__, parse)
 
     # print(inp)
     graph = to_graph(inp)

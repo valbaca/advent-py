@@ -1,4 +1,4 @@
-from advent.elf import lines
+from advent.elf import read_lines
 
 """
 Straightforward. Setup IO helpers. Using __file__ is a cute way to get the input via naming conventions.
@@ -30,6 +30,6 @@ def part2(ints):
 
 if __name__ == '__main__':
     # print(f"test: {part1(test_lines(__file__, int))}")
-    print(f"Part 1: {part1(lines(__file__, int))}")
+    print(f"Part 1: {part1(read_lines(__file__, int))}")
     # print("test: " + part2(test_lines(__file__, int)))
-    print(f"Part 2: {part2(lines(__file__, int))}")
+    print(f"Part 2: {part2(read_lines(__file__, int))}")

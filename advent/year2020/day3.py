@@ -1,4 +1,4 @@
-from advent.elf import lines, product
+from advent.elf import read_lines, product
 
 
 def part1(rows):
@@ -23,7 +23,7 @@ def part2(rows):
 
 
 if __name__ == '__main__':
-    part1(lines(__file__, list, True))
-    part1(lines(__file__, list))
-    part2(lines(__file__, list, True))
-    part2(lines(__file__, list))
+    part1(read_lines(__file__, list, True))
+    part1(read_lines(__file__, list))
+    part2(read_lines(__file__, list, True))
+    part2(read_lines(__file__, list))

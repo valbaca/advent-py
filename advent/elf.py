@@ -2,7 +2,9 @@ import re
 from functools import reduce
 from typing import AnyStr, Pattern
 
-"""An elf is Santa's little helper, so elf.py has helper functions!"""
+"""
+An elf is Santa's little helper, so elf.py has helper functions!
+"""
 
 
 # IO-related
@@ -15,7 +17,7 @@ def test_file(file):
     return file.replace(".py", "-test.txt")
 
 
-def lines(filename: AnyStr, parser=None, test=False):
+def read_lines(filename: AnyStr, parser=None, test=False):
     """
     Returns the lines of input as a list of strings.
     If given a python file (preferred), like: lines(__file__)
@@ -74,11 +76,11 @@ def safe_atoi(s: AnyStr):
     return out
 
 
-def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> list[AnyStr]:
+def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> list[AnyStr]:
     """
     Separates string and applies safe_atoi
     :param s: string to be separated
-    :param regex: regex to separate with. Default is split on non-alphanumeric
+    :param regex: regex to separate with. Default is split on non-alphanumeric-and-hyphen
     :return: separated parts as ints (where possible)
     """
     return list(map(safe_atoi, split_on(s, regex)))

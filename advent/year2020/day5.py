@@ -1,4 +1,4 @@
-from advent.elf import lines
+from advent.elf import read_lines
 
 
 def binary_str(s, zero):
@@ -26,7 +26,7 @@ def part2(seats):
 
 
 def main():
-    inp = lines(__file__)
+    inp = read_lines(__file__)
     seats = list(map(score, inp))
     print(max(seats))
 
