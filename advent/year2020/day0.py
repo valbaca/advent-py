@@ -1,5 +1,4 @@
-from advent.elf import read_lines
-import re
+from advent import elf
 
 
 def part1(lines):
@@ -13,7 +12,7 @@ def part2(lines):
 
 
 def main():
-    lines = read_lines(__file__)
+    lines = elf.read_lines(__file__)
     print(part1(lines))
     print(part2(lines))
 
