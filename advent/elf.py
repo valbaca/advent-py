@@ -1,7 +1,7 @@
 import bisect
 import re
 from functools import reduce
-from typing import AnyStr, Pattern
+from typing import AnyStr, Pattern, List
 
 """
 An elf is Santa's little helper, so elf.py has helper functions!
@@ -57,7 +57,7 @@ def lines_blank_grouped(filename):
 
 # String related
 
-def split_on(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> list[AnyStr]:
+def split_on(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> List[AnyStr]:
     """
     Like re.split, but also removes blanks.
     Default split regex is any non-alphanumeric (including hyphen! careful with negative numbers)
@@ -77,7 +77,7 @@ def safe_atoi(s: AnyStr):
     return out
 
 
-def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> list[AnyStr]:
+def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> List[AnyStr]:
     """
     Separates string and applies safe_atoi
     :param s: string to be separated
