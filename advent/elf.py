@@ -1,3 +1,4 @@
+import bisect
 import re
 from functools import reduce
 from typing import AnyStr, Pattern
@@ -84,6 +85,18 @@ def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> list[AnyStr]
     :return: separated parts as ints (where possible)
     """
     return list(map(safe_atoi, split_on(s, regex)))
+
+
+# Collections
+
+def bisect_index(arr, n):
+    """
+    Returns the index of n in the sorted list or None if n is not present in arr.
+    """
+    bi = bisect.bisect_left(arr, n)
+    if bi < len(arr) and arr[bi] == n:
+        return bi
+    return None
 
 
 # Math
