@@ -26,10 +26,7 @@ def part1(lines):
 
 
 def parse_part2(lines):
-    inputs = []
-    for line in lines[1:]:
-        inputs.append(list(map(safe_atoi, line.split(","))))
-    return inputs
+    return list(map(safe_atoi, lines[1].split(",")))
 
 
 def solve_part2(buses):
@@ -42,7 +39,7 @@ def solve_part2(buses):
 
 
 def part2(lines):
-    return list(map(solve_part2, parse_part2(lines)))
+    return solve_part2(parse_part2(lines))
 
 
 def main():
