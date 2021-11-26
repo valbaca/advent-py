@@ -65,6 +65,10 @@ def split_on(s: AnyStr, regex: Pattern[AnyStr] = r"[\W]") -> List[AnyStr]:
     return [split for split in re.split(regex, s) if split]
 
 
+def str_replace(s, pos, char):
+    return s[:pos] + char + s[pos + 1:]
+
+
 # String conversions
 
 def safe_atoi(s: AnyStr):
