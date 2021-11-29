@@ -1,88 +1,98 @@
 from advent import elf
 
+"""
+This one was a great challenge.
+I did end up having to look up hints for part 2, which really helped.
+Like many, I started with a naive array-list implementation, but that did not scale to part 2.
+I thought about using a circular linked-list, but was concerned about the runtime of finding the destination cup.
 
-def rem(a, i):
+Then I rewrote the whole thing to use the `after` array, where given cup i, a[i] gives the cup after cup i.
+The description of part 2 should've been an obvious hint that such an array would be a good approach.
+When you have contiguous values, such a lookup array is perfect.
+Other than that, a hash-table would've been good too.
+"""
+
+
+def move(a, c, mx):  # after_array, current, max
+    ptr = a[c]
     removed = []
-    i1 = i + 1
     for _ in range(3):
-        if i1 < len(a):
-            removed.append(a[i1])
-            del a[i1]
-        else:
-            removed.append(a[0])
-            del a[0]
-    return a, removed
-
-
-def max_with_index(a):
-    mx, mi = a[0], 0
-    for i, e in enumerate(a):
-        if e > mx:
-            mx, mi = e, i
-    return mx, mi
-
-
-def find_dest(rest, three, curr):
-    seek = curr - 1
-    while seek in three:
-        seek -= 1
-    if seek < 1:
-        return max_with_index(rest)[1]
-    return rest.index(seek)
-
-
-def move(a, ci):
-    curr = a[ci]
-    rest, three = rem(a, ci)
-    dest1 = find_dest(rest, three, curr) + 1
-    rest[dest1:dest1] = three
-    if dest1 <= ci:
-        new_ci = (rest.index(curr) + 1) % len(rest)
-    else:
-        new_ci = ci + 1
-    return rest, new_ci
+        removed.append(ptr)
+        ptr = a[ptr]
+    # stitch curr -> _ -> _ -> _ -> ptr to be curr -> ptr
+    a[c] = ptr
+    # find the destination cup
+    dest = c - 1
+    while dest in removed or dest == 0:
+        if dest == 0:
+            dest = mx
+        if dest in removed:
+            dest -= 1
+    # insert removed between dest -> [removed] -> after_dest
+    after_dest = a[dest]
+    a[dest] = removed[0]
+    a[removed[-1]] = after_dest
+    return a[c]
 
 
 def print_soln_p1(a):
-    a1 = a.index(1)
-    a2 = a1 + 1 % len(a)
-    ax = a[a2:] + a[:a1]
-    return ''.join(map(str, ax))
+    out = [1]
+    while len(out) < (len(a) - 1):
+        out.append(a[out[-1]])
+    return ''.join(map(str, out[1:]))
 
 
 def part1(inp, moves):
-    a = list(map(elf.safe_atoi, inp))
-    ci = 0
-    for i in range(moves):
-        a, ci = move(a, ci)
-    return print_soln_p1(a)
+    print(f"Part 1: input={inp}, moves={moves}")
+    inp_a = list(map(elf.safe_atoi, inp))
+    after = [0 for _ in range(len(inp_a) + 1)]
+    mx = inp_a[-1]
+    for i in range(len(inp_a) - 1):
+        val = inp_a[i]
+        after[val] = inp_a[i + 1]
+        if val > mx:
+            mx = val
+    after[inp_a[-1]] = inp_a[0]
+    curr = inp_a[0]
+    for _ in range(moves):
+        curr = move(after, curr, mx)
+    return print_soln_p1(after)
 
 
-def print_soln_p2(a):
-    a1 = a.index(1)
-    a2 = a1 + 1 % len(a)
-    a3 = a2 + 1 % len(a)
-    print(a2, a3)
-    return a2 * a3
+def print_soln_p2(after):
+    a1 = after[1]
+    a2 = after[a1]
+    print(a1, a2)
+    return a1 * a2
 
 
 def part2(inp, moves):
-    a = list(map(elf.safe_atoi, inp))
-    for x in range(max(a) + 1, 1000001):
-        a.append(x)
-    ci = 0
-    for i in range(moves):
-        if i % 10000 == 0:
-            print(f"move {i}")
-        a, ci = move(a, ci)
-    print()
-    return print_soln_p2(a)
+    print(f"Part 2: input={inp}, moves={moves}")
+    inp_a = list(map(elf.safe_atoi, inp))
+    after = [0 for _ in range(1000001)]
+    for i in range(len(inp_a) - 1):
+        val = inp_a[i]
+        after[val] = inp_a[i + 1]
+    last = inp_a[-1]
+    for i in range(max(inp_a), 1000000):
+        after[last] = i + 1
+        last = i + 1
+    after[1000000] = inp_a[0]
+    curr = inp_a[0]
+    mx = 1000000
+    for _ in range(moves):
+        curr = move(after, curr, mx)
+    return print_soln_p2(after)
 
 
 def main():
+    print(part1("389125467", 10))
+    print(part1("389125467", 100))
+
     ans1 = part1("974618352", 100)
     assert (ans1 == "75893264")
     print(ans1)
+
     print(part2("389125467", 10000000))
     print(part2("974618352", 10000000))
 
