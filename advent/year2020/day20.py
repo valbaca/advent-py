@@ -15,6 +15,12 @@ Problems like this do "reward" me for poor coding. Just cobbling it together get
 """
 
 
+def main():
+    lines = elf.lines_blank_grouped(elf.in_file(__file__))
+    print(part1(lines))
+    print(part2(lines))
+
+
 def get_left_edge(image):
     edge = []
     for row in image:
@@ -244,12 +250,6 @@ def part2(line_groups):
     full_image = merge_tiles(tiles)
     # print_image(full_image)
     return find_any_sea_monsters(full_image)
-
-
-def main():
-    lines = elf.lines_blank_grouped(elf.in_file(__file__))
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

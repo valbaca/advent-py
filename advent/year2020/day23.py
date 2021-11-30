@@ -13,6 +13,18 @@ Other than that, a hash-table would've been good too.
 """
 
 
+def main():
+    print(part1("389125467", 10))
+    print(part1("389125467", 100))
+
+    ans1 = part1("974618352", 100)
+    assert (ans1 == "75893264")
+    print(ans1)
+
+    print(part2("389125467", 10000000))
+    print(part2("974618352", 10000000))
+
+
 def move(a, c, mx):  # after_array, current, max
     ptr = a[c]
     removed = []
@@ -83,18 +95,6 @@ def part2(inp, moves):
     for _ in range(moves):
         curr = move(after, curr, mx)
     return print_soln_p2(after)
-
-
-def main():
-    print(part1("389125467", 10))
-    print(part1("389125467", 100))
-
-    ans1 = part1("974618352", 100)
-    assert (ans1 == "75893264")
-    print(ans1)
-
-    print(part2("389125467", 10000000))
-    print(part2("974618352", 10000000))
 
 
 if __name__ == '__main__':

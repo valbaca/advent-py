@@ -13,6 +13,21 @@ with generating the data structures.
 """
 
 
+def main():
+    inp = read_lines(__file__, parse)
+
+    # print(inp)
+    graph = to_graph(inp)
+    # print(graph)
+    # part 1
+    print(len([k for k in graph.keys() if contains(graph, k, "shiny gold")]))
+
+    # part 2
+    counting_graph = to_counting_graph(inp)
+    # print(counting_graph)
+    print(count_bags(counting_graph, "shiny gold"))
+
+
 def parse(line):
     # line = "light red bags contain 1 bright white bag, 2 muted yellow bags."
     splits = re.split(r"[\s,.]", line)
@@ -61,21 +76,6 @@ def count_bags(graph, top_color):
         total += count
         total += (count * count_bags(graph, color))
     return total
-
-
-def main():
-    inp = read_lines(__file__, parse)
-
-    # print(inp)
-    graph = to_graph(inp)
-    # print(graph)
-    # part 1
-    print(len([k for k in graph.keys() if contains(graph, k, "shiny gold")]))
-
-    # part 2
-    counting_graph = to_counting_graph(inp)
-    # print(counting_graph)
-    print(count_bags(counting_graph, "shiny gold"))
 
 
 if __name__ == '__main__':

@@ -1,6 +1,12 @@
 from advent import elf
 
 
+def main():
+    lines = elf.read_lines(__file__, parse)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def parse(line):
     return line[0], int(line[1:])
 
@@ -78,12 +84,6 @@ def part2(lines):
         else:
             move_boat(data['wayp'], move, dist)
     return abs(data['boat']['east']) + abs(data['boat']['north'])
-
-
-def main():
-    lines = elf.read_lines(__file__, parse)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

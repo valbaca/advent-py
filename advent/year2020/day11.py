@@ -1,6 +1,13 @@
 from advent import elf
 
 
+def main():
+    lines = parse(elf.read_lines(__file__))
+    print(part1(lines))
+    lines = parse(elf.read_lines(__file__))
+    print(part2(lines))
+
+
 def parse(lines):
     return [list(line) for line in lines]
 
@@ -111,13 +118,6 @@ def part2(g):
         updated, g = update(g, occ_beyond, occ_tolerance=5)
         print_grid(g)
     return count_occ_seats(g)
-
-
-def main():
-    lines = parse(elf.read_lines(__file__))
-    print(part1(lines))
-    lines = parse(elf.read_lines(__file__))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

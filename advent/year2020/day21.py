@@ -13,6 +13,12 @@ Really glad I built the 'data' object the way I did, it made part 2 trivial.
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def parse_line(line):
     splits = re.split(r"[\s(),]", line)
     strs = [s for s in splits if s != '']
@@ -69,12 +75,6 @@ def part1(lines):
 def part2(lines):
     data = get_data(lines)
     return ','.join([item[1] for item in sorted(data['known'].items())])
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

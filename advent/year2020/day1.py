@@ -6,6 +6,13 @@ It does mean the input is alongside the python file, but it's kind of easier tha
 """
 
 
+def main():
+    # print(f"test: {part1(test_lines(__file__, int))}")
+    print(f"Part 1: {part1(read_lines(__file__, int))}")
+    # print("test: " + part2(test_lines(__file__, int)))
+    print(f"Part 2: {part2(read_lines(__file__, int))}")
+
+
 def part1(ints):
     set_ints = set(ints)
     found = None
@@ -29,7 +36,4 @@ def part2(ints):
 
 
 if __name__ == '__main__':
-    # print(f"test: {part1(test_lines(__file__, int))}")
-    print(f"Part 1: {part1(read_lines(__file__, int))}")
-    # print("test: " + part2(test_lines(__file__, int)))
-    print(f"Part 2: {part2(read_lines(__file__, int))}")
+    main()

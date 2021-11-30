@@ -2,6 +2,12 @@ from advent import elf
 from collections import deque
 
 
+def main():
+    line_groups = elf.lines_blank_grouped(elf.in_file(__file__))
+    print(part1(line_groups))
+    print(part2(line_groups))
+
+
 def score_deck(deck):
     temp = deque()
     n = len(deck)
@@ -103,12 +109,6 @@ def play_recursively(decks, layer=1):
 
 def part2(line_groups):
     return play_recursively(parse_decks(line_groups))
-
-
-def main():
-    line_groups = elf.lines_blank_grouped(elf.in_file(__file__))
-    print(part1(line_groups))
-    print(part2(line_groups))
 
 
 if __name__ == '__main__':

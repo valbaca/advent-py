@@ -22,6 +22,14 @@ TIL:
 - """
 
 
+def main():
+    lines = strip_lines(in_file(__file__))
+    part1(lines)
+    part2(strip_lines("day4-invalid.txt"))
+    part2(strip_lines("day4-valid.txt"))
+    part2(lines)
+
+
 def lines_to_passports(lines):
     # collect into arrays separated by the blank line
     passports = [[]]
@@ -88,14 +96,6 @@ def valid_passport(p):
 def part2(lines):
     passports = lines_to_passports(lines)
     print(len([p for p in passports if valid_passport(p)]))
-
-
-def main():
-    lines = strip_lines(in_file(__file__))
-    part1(lines)
-    part2(strip_lines("day4-invalid.txt"))
-    part2(strip_lines("day4-valid.txt"))
-    part2(lines)
 
 
 if __name__ == '__main__':

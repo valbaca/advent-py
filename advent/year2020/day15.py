@@ -7,6 +7,12 @@ you're much better off with a custom object (obj) type to turn O(n) operations i
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def rindex(a, e):
     if e not in a:
         return None
@@ -57,12 +63,6 @@ def part2(lines):
     while obj['len'] < 30000000:
         append_num(obj, next_counting_num(obj))
     return obj['last']
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

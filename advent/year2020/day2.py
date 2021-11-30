@@ -3,6 +3,13 @@ from advent.elf import read_lines, septoi
 """list.count is nice!"""
 
 
+def main():
+    part1(read_lines(__file__, septoi, True))
+    part1(read_lines(__file__, septoi))
+    part2(read_lines(__file__, septoi, True))
+    part2(read_lines(__file__, septoi))
+
+
 def part1(xs):
     n = 0
     for mn, mx, c, s in xs:
@@ -21,7 +28,4 @@ def part2(xs):
 
 
 if __name__ == '__main__':
-    part1(read_lines(__file__, septoi, True))
-    part1(read_lines(__file__, septoi))
-    part2(read_lines(__file__, septoi, True))
-    part2(read_lines(__file__, septoi))
+    main()

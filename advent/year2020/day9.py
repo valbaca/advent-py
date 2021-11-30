@@ -4,6 +4,14 @@ from advent.elf import read_lines, safe_atoi, even, bisect_index
 bisect and prefix sums are key
 """
 
+
+def main():
+    lines = read_lines(__file__, safe_atoi)
+    target = part1(lines)
+    print(target)
+    print(part2(lines, target))
+
+
 PLEN = 25
 
 
@@ -36,13 +44,6 @@ def part2(lines, target):
             sub_seq = lines[i:i + 1 + bi]
             return max(sub_seq) + min(sub_seq)
     return None
-
-
-def main():
-    lines = read_lines(__file__, safe_atoi)
-    target = part1(lines)
-    print(target)
-    print(part2(lines, target))
 
 
 if __name__ == '__main__':

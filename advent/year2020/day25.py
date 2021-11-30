@@ -1,5 +1,14 @@
 from advent import elf
 
+
+def main():
+    # [Card PK, Door PK]
+    pub_keys = [5764801, 17807724]
+    print(part1(pub_keys))
+    pub_keys = [335121, 363891]
+    print(part1(pub_keys))
+
+
 DAY = 20201227
 
 
@@ -33,20 +42,6 @@ def part1(pks):  # public keys
         val = transform(val, pks[1])
     ans.append(val)
     return ans
-
-
-def part2(lines):
-    pass
-    # code here
-
-
-def main():
-    # [Card PK, Door PK]
-    pub_keys = [5764801, 17807724]
-    print(part1(pub_keys))
-    pub_keys = [335121, 363891]
-    print(part1(pub_keys))
-    print(part2(pub_keys))
 
 
 if __name__ == '__main__':

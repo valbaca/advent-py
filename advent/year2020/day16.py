@@ -27,6 +27,12 @@ Need to just write my own
 """
 
 
+def main():
+    line_groups = elf.lines_blank_grouped(elf.in_file(__file__))
+    print(part1(line_groups))
+    print(part2(line_groups))
+
+
 def parse_ranges(line):
     strs = [elf.safe_atoi(s) for s in re.split(r"[\D]", line)]
     strs = [s for s in strs if isinstance(s, int)]
@@ -109,12 +115,6 @@ def part2(line_groups):
     fields = [idx for fields in reduced_fields for idx in fields]
     # first six fields start with "departure"
     return elf.product([your_ticket[i] for i in fields[:6]])
-
-
-def main():
-    line_groups = elf.lines_blank_grouped(elf.in_file(__file__))
-    print(part1(line_groups))
-    print(part2(line_groups))
 
 
 if __name__ == '__main__':

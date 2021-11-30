@@ -9,6 +9,12 @@ I just had to adapt it to work with more buses.
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def lines_to_input(lines):
     return int(lines[0]), list(map(safe_atoi, filter(lambda x: x != 'x', lines[1].split(","))))
 
@@ -40,12 +46,6 @@ def solve_part2(buses):
 
 def part2(lines):
     return solve_part2(parse_part2(lines))
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

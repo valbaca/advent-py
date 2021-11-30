@@ -8,6 +8,12 @@ Also lucky that each number is a single digit.
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def apply_op(val, op, v):
     if val is None and op is None:
         return v
@@ -99,12 +105,6 @@ def part2(lines):
     sums = [eval_line2(line)[0] for line in lines]
     # print(sums)
     return sum(sums)
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

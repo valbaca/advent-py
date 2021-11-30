@@ -7,6 +7,12 @@ I was honestly lucky that my part 1 solution also solved part 2 without any modi
 """
 
 
+def main():
+    lines = elf.lines_blank_grouped(elf.in_file(__file__))
+    print(part1(lines))
+    print(part2(lines))
+
+
 def partial_match(all_rules, rule_num, s):
     rules = all_rules[rule_num]
     rem_strs = []
@@ -72,12 +78,6 @@ def part2(lines):
     # for m in messages:
     #     print(f"{m} => {full_match(rules, 0, m)}")
     return len([m for m in messages if full_match(rules, 0, m)])
-
-
-def main():
-    lines = elf.lines_blank_grouped(elf.in_file(__file__))
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

@@ -1,6 +1,12 @@
 from advent.elf import read_lines, septoi
 
 
+def main():
+    lines = read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def part1(lines, acc=0, ip=0, execd=None):
     if not execd:
         execd = set()
@@ -43,12 +49,6 @@ def part2(lines, acc=0, ip=0, execd=None, changed=False):
         else:
             raise RuntimeError(f"{op} is not an operation")
     return acc, ip == len(lines)
-
-
-def main():
-    lines = read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

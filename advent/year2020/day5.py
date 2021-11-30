@@ -1,6 +1,14 @@
 from advent.elf import read_lines
 
 
+def main():
+    inp = read_lines(__file__)
+    seats = list(map(score, inp))
+    print(max(seats))
+
+    part2(seats)
+
+
 def binary_str(s, zero):
     return int(str.join("", map(lambda c: '0' if c == zero else '1', list(s))), 2)
 
@@ -23,14 +31,6 @@ def part2(seats):
     for i in range(min(seats), max(seats)):
         if i not in seats:
             print(i)
-
-
-def main():
-    inp = read_lines(__file__)
-    seats = list(map(score, inp))
-    print(max(seats))
-
-    part2(seats)
 
 
 if __name__ == '__main__':

@@ -9,6 +9,12 @@ The 'float' bits are simplified by doing an xor flag, since xor 1 flips a bit.
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def parse_mask(line):
     line = line[7:]
     set_bits_str = ''.join(map(lambda c: '1' if c == '1' else '0', list(line)))
@@ -84,12 +90,6 @@ def part2(lines):
             add, val = parse_mem(line)
             update_mem_p2(mem, mask, add, val)
     return sum(mem.values())
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

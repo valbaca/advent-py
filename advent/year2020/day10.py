@@ -21,6 +21,17 @@ I then simplified the method args further until I got down to just one!
 """
 
 
+def main():
+    lines = elf.read_lines(__file__, elf.safe_atoi)
+    print(part1(lines))
+    # part 2 was taking so long I added timing, but after lru_cache, takes <1ms
+    tic = time.perf_counter()
+    answer2 = part2(lines)
+    toc = time.perf_counter()
+    print(answer2)
+    print(f"Part 2 {toc - tic:0.4f} seconds")
+
+
 def lines_to_jolts(lines):
     jolts = lines.copy()
     jolts.append(0)
@@ -64,17 +75,6 @@ def part2(lines):
     jolts.sort()
     jolt_solver = JoltSolver(jolts)
     return jolt_solver.solve(0)
-
-
-def main():
-    lines = elf.read_lines(__file__, elf.safe_atoi)
-    print(part1(lines))
-    # part 2 was taking so long I added timing, but after lru_cache, takes <1ms
-    tic = time.perf_counter()
-    answer2 = part2(lines)
-    toc = time.perf_counter()
-    print(answer2)
-    print(f"Part 2 {toc - tic:0.4f} seconds")
 
 
 if __name__ == '__main__':

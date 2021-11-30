@@ -11,6 +11,12 @@ If it's fast enough, I can submit and move on.
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    print(part1(lines))
+    print(part2(lines))
+
+
 def is_active(char):
     return char == '#' or char == '&'
 
@@ -192,12 +198,6 @@ def part2(lines):
         hcube = cycle_hypercube(hcube)
         # print(f"After {i + 1} cycles: {hc_count_active(hcube)} active")
     return hc_count_active(hcube)
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    print(part1(lines))
-    print(part2(lines))
 
 
 if __name__ == '__main__':

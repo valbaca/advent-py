@@ -1,6 +1,13 @@
 from advent.elf import read_lines, product
 
 
+def main():
+    part1(read_lines(__file__, list, True))
+    part1(read_lines(__file__, list))
+    part2(read_lines(__file__, list, True))
+    part2(read_lines(__file__, list))
+
+
 def part1(rows):
     print(trees_hit([3, 1], rows))
 
@@ -23,7 +30,4 @@ def part2(rows):
 
 
 if __name__ == '__main__':
-    part1(read_lines(__file__, list, True))
-    part1(read_lines(__file__, list))
-    part2(read_lines(__file__, list, True))
-    part2(read_lines(__file__, list))
+    main()

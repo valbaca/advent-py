@@ -14,6 +14,13 @@ I even went with a very sub-optimal way to handle the "borders":
 """
 
 
+def main():
+    lines = elf.read_lines(__file__)
+    ans1, tiles = part1(lines)
+    print(ans1)
+    print(part2(tiles, 100))
+
+
 def get_dirs(line):
     dirs = []
     i = 0
@@ -139,13 +146,6 @@ def part2(tiles, days):
         c, tiles = one_day(tiles)
         print(f"Day {day}: {c}")
     return c
-
-
-def main():
-    lines = elf.read_lines(__file__)
-    ans1, tiles = part1(lines)
-    print(ans1)
-    print(part2(tiles, 100))
 
 
 if __name__ == '__main__':
