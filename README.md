@@ -44,12 +44,12 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 What I've completed **in any language**
 
 - Year 2015: 🎄 DONE! 
-  - Days 1-19 in Go: [valbaca/AdventOfCode2015-Go](https://github.com/valbaca/AdventOfCode2015-Go)
+  - Days 1-19 in Go: [github.com/valbaca/AdventOfCode2015-Go](https://github.com/valbaca/AdventOfCode2015-Go)
   - Days 19-22 in Python here: [advent/year2015](advent/year2015)
-  - Again in Clojure, to learn Clojure: [valbaca/advent](https://github.com/valbaca/advent)
+  - Again in Clojure, to learn Clojure: [github.com/valbaca/advent](https://github.com/valbaca/advent)
 - Year 2016: ❄️ On ice. On day 20.
   - Days 1-7 and day 19 in Python here: [advent/year2016](advent/year2016)
-  - Days 8-18 in Java: [valbaca/advent](https://github.com/valbaca/advent)
+  - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
 - Year 2017: ❄️ On ice. On day 7.
   - Days 1-5 in [Crystal](https://crystal-lang.org/)
 - Year 2018: ❄️ On ice. On day 6.
