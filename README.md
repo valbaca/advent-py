@@ -47,14 +47,14 @@ What I've completed **in any language**
   - Days 1-19 in Go: [valbaca/AdventOfCode2015-Go](https://github.com/valbaca/AdventOfCode2015-Go)
   - Days 19-22 in Python here: [advent/year2015](advent/year2015)
   - Again in Clojure, to learn Clojure: [valbaca/advent](https://github.com/valbaca/advent)
-- Year 2016: ❄️ On ice. On day 19.
-  - Days 1-7 in Python here: [advent/year2016](advent/year2016)
+- Year 2016: ❄️ On ice. On day 20.
+  - Days 1-7 and day 19 in Python here: [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [valbaca/advent](https://github.com/valbaca/advent)
 - Year 2017: ❄️ On ice. On day 7.
   - Days 1-5 in [Crystal](https://crystal-lang.org/)
 - Year 2018: ❄️ On ice. On day 6.
 - Year 2019: ❄️ On ice. On day 2.
 - Year 2020: 🎄 DONE! All done in Python here: [advent/year2020](advent/year2020)
-- Year 2021: 🎁 COMING VERY SOON!
+- Year 2021: 🌟 IN PROGRESS!
 
 
