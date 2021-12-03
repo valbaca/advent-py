@@ -167,3 +167,24 @@ def extended_gcd(a, b):
         old_t, t = t, old_t - quotient * t
 
     return old_r, old_s, old_t
+
+
+def prefix_sums(xs):
+    # then just use p[end] - p[start]
+    pref_sums = [0] + xs[:]
+    for i in range(1, len(pref_sums)):
+        pref_sums[i] += pref_sums[i - 1]
+    return pref_sums
+
+
+def transpose(m):
+    """
+    Transposes a matrix (a rectangle-shaped list of lists)
+    If the input is a list of strings, the output is also a list of strings
+    """
+    rc = len(m)  # row count
+    cc = len(m[0])  # col count
+    if isinstance(m[0], str):
+        return [''.join([m[r][c] for r in range(rc)]) for c in range(cc)]
+    else:
+        return [[m[r][c] for r in range(rc)] for c in range(cc)]

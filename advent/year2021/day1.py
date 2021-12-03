@@ -4,6 +4,7 @@ from advent import elf
 Prefix Sums FTW!
 """
 
+
 def main():
     test_lines = elf.read_lines(__file__, parser=elf.safe_atoi, test=True)
     print("Part 1 (test):", part1(test_lines))
@@ -27,12 +28,10 @@ def part1(lines):
 
 def part2(lines):
     # Using prefix sums to make the sliding sum operations a single operation
-    pref = [0] + lines[:]
-    for i in range(1, len(pref)):
-        pref[i] += pref[i - 1]
+    p = elf.prefix_sums(lines)
     count = 0
-    for i in range(4, len(pref)):
-        if (pref[i] - pref[i - 3]) > (pref[i - 1] - pref[i - 4]):
+    for i in range(4, len(p)):
+        if (p[i] - p[i - 3]) > (p[i - 1] - p[i - 4]):
             count += 1
     return count
 

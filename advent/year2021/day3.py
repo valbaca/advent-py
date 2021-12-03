@@ -13,20 +13,10 @@ def main():
 
 
 def part1(lines):
-    counts = [0] * len(lines[0])
-    for line in lines:
-        for i, c in enumerate(line):
-            if c == '1':
-                counts[i] += 1
-    gamma = ''
-    epsilon = ''
-    for i, count in enumerate(counts):
-        if count > len(lines) // 2:
-            gamma += '1'
-            epsilon += '0'
-        else:
-            gamma += '0'
-            epsilon += '1'
+    tlines = elf.transpose(lines[:])
+    counts = [line.count('1') - line.count('0') for line in tlines]
+    gamma = ''.join([('1' if count > 0 else '0') for count in counts])
+    epsilon = ''.join([('1' if count <= 0 else '0') for count in counts])
     # print(f"g={gamma} ep={epsilon}")
     return int(gamma, 2) * int(epsilon, 2)
 
@@ -34,10 +24,7 @@ def part1(lines):
 def common(lines, pos, want_most_common=True):
     if len(lines) == 1:
         return lines
-    count1 = 0
-    for line in lines:
-        if line[pos] == '1':
-            count1 += 1
+    count1 = elf.transpose(lines)[pos].count('1')
     one_most = count1 > len(lines) // 2 or (len(lines) % 2 == 0 and count1 == len(lines) // 2)
     want_one = one_most
     if not want_most_common:
