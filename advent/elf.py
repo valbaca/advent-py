@@ -45,9 +45,12 @@ def strip_lines(filename):
 
 def lines_blank_grouped(filename):
     """For problems where the lines of input are grouped by blank lines."""
-    orig_lines = strip_lines(filename)
+    return blank_grouped(strip_lines(filename))
+
+
+def blank_grouped(lines):
     groups = [[]]
-    for line in orig_lines:
+    for line in lines:
         if line:
             groups[-1].append(line)
         else:
@@ -92,6 +95,10 @@ def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> List[AnyStr]
 
 
 # Collections
+
+def int_list(strs):
+    return [int(s) for s in strs if s]
+
 
 def bisect_index(arr, n):
     """
