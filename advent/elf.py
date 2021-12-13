@@ -195,3 +195,10 @@ def transpose(m):
         return [''.join([m[r][c] for r in range(rc)]) for c in range(cc)]
     else:
         return [[m[r][c] for r in range(rc)] for c in range(cc)]
+
+
+def between(x, x1, x2):
+    """Whether x is between (inclusive) x1 and x2.
+    x1 and x2 can be unordered so you can do between(0, 1, -1) == True
+    If you want ordered, just use x1 <= x <= x2"""
+    return x1 <= x <= x2 or x2 <= x <= x1
