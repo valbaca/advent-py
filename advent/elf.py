@@ -110,6 +110,35 @@ def bisect_index(arr, n):
     return None
 
 
+# Grids / Matricies
+
+def around_values(grid, r, c):
+    """Return the values up/down/left/right; not diagonals"""
+    return [grid[rd][cd] for rd, cd in around_indexes(grid, r, c)]
+
+
+def around_indexes(grid, r, c):
+    """Return the indicies up/down/left/right; not diagonals"""
+    row = grid[r]
+    diffs = [-1, 1]
+    rows = [[r + d, c] for d in diffs if 0 <= r + d < len(grid)]
+    cols = [[r, c + d] for d in diffs if 0 <= c + d < len(row)]
+    return rows + cols
+
+
+def transpose(m):
+    """
+    Transposes a matrix (a rectangle-shaped list of lists)
+    If the input is a list of strings, the output is also a list of strings
+    """
+    rc = len(m)  # row count
+    cc = len(m[0])  # col count
+    if isinstance(m[0], str):
+        return [''.join([m[r][c] for r in range(rc)]) for c in range(cc)]
+    else:
+        return [[m[r][c] for r in range(rc)] for c in range(cc)]
+
+
 # Math
 
 def odd(n):
@@ -182,19 +211,6 @@ def prefix_sums(xs):
     for i in range(1, len(pref_sums)):
         pref_sums[i] += pref_sums[i - 1]
     return pref_sums
-
-
-def transpose(m):
-    """
-    Transposes a matrix (a rectangle-shaped list of lists)
-    If the input is a list of strings, the output is also a list of strings
-    """
-    rc = len(m)  # row count
-    cc = len(m[0])  # col count
-    if isinstance(m[0], str):
-        return [''.join([m[r][c] for r in range(rc)]) for c in range(cc)]
-    else:
-        return [[m[r][c] for r in range(rc)] for c in range(cc)]
 
 
 def between(x, x1, x2):
