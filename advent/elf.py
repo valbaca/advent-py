@@ -2,6 +2,7 @@ import bisect
 import re
 from functools import reduce
 from typing import AnyStr, Pattern, List
+from math import inf
 
 """
 An elf is Santa's little helper, so elf.py has helper functions!
@@ -126,6 +127,31 @@ def around_indexes(grid, r, c):
     return rows + cols
 
 
+def diff3(val, lo=0, hi=inf, df=1):
+    """Return list [val-df, val, val+df], clamped to [lo, hi)"""
+    diffs = [val-df, val, val+df]
+    return [x for x in diffs if lo <= x < hi]
+
+def all_around(grid, row, col, df=1):
+    """Return values around row, col in grid (including diagonals) but not grid[row][col] itself"""
+    lst = []
+    for nrow in diff3(row, hi=len(grid), df=df):
+        for ncol in diff3(col, hi=len(grid[nrow]), df=df):
+            if not (nrow == row and ncol == col):
+                lst.append([nrow, ncol])
+    return lst
+
+def enumerate_grid(grid):
+    return [[rowi, row, coli, col] for rowi, row in enumerate(grid) for coli, col in enumerate(row)]
+
+def iter_grid_values(grid):
+    """Gives [row, col] value pairs for grid"""
+    return [[row, col] for row in grid for col in row]
+
+def iter_grid_indexes(grid):
+    """Gives [rowi, coli] index pairs for grid"""
+    return [[r, c] for r in range(len(grid)) for c in range(len(grid[r]))]
+
 def transpose(m):
     """
     Transposes a matrix (a rectangle-shaped list of lists)
@@ -215,6 +241,6 @@ def prefix_sums(xs):
 
 def between(x, x1, x2):
     """Whether x is between (inclusive) x1 and x2.
-    x1 and x2 can be unordered so you can do between(0, 1, -1) == True
+    x1 and x2 can be in any order, allowing: between(0, 1, -1) == True
     If you want ordered, just use x1 <= x <= x2"""
     return x1 <= x <= x2 or x2 <= x <= x1
