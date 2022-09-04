@@ -19,7 +19,7 @@ def test_file(file):
     return file.replace(".py", "-test.txt")
 
 
-def read_lines(filename: AnyStr, parser=None, test=False):
+def read_lines(filename: AnyStr, parser=None, test=False) -> List[str]:
     """
     Returns the lines of input as a list of strings.
     If given a python file (preferred), like: lines(__file__)
