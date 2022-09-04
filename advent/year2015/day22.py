@@ -1,3 +1,4 @@
+import math
 import sys
 from enum import Enum
 from dataclasses import dataclass
@@ -21,7 +22,6 @@ def backtrack(args):
         undo_move(option, args)
 """
 
-min_found = sys.maxsize
 hard_mode = False
 
 
@@ -57,11 +57,8 @@ class Boss:
 
 def apply(you, boss, effects):
     next_turn_effects = []
-    active_set = set()
     for effect in effects:
         (es, duration) = effect
-        if es in active_set:
-            raise Exception(f"got {es}, active set of spells = {active_set}")
         if es == Spell.Shield:
             you.armor = 7
         elif es == Spell.Poison:
@@ -71,17 +68,16 @@ def apply(you, boss, effects):
 
         if duration > 1:
             next_turn_effects.append((es, duration - 1))
-            active_set.add(es)
-        elif duration == 1 and es == Spell.Shield:
+        elif es == Spell.Shield and duration == 1:
             you.armor = 0
-    return you, boss, next_turn_effects, active_set
+    return you, boss, next_turn_effects
 
 
-DEATH = INVALID = (True, None, None)
-NOT_DONE = (False, False, None)
+failure = "failure"
+stalemate = "stalemate"
+victory = "victory"
 
-
-def battle(spells):
+def battle(spells, min_found):
     # Execute the spells in order
     you = You(50, 500, 0)
     boss = Boss(58, 9)
@@ -91,18 +87,19 @@ def battle(spells):
         if hard_mode:
             you.get_hit(1)
             if you.dead():
-                return DEATH
+                return failure, -1
         # each loop is one round: effects, you cast, effects again, boss hits back
-        (you, boss, effects, active_set) = apply(you, boss, effects)
+        you, boss, effects = apply(you, boss, effects)
         if boss.dead():
-            return (False, True, mana_spent)
+            return victory, mana_spent
         spell_cost = spell.value[1]
         mana_spent += spell_cost
         if mana_spent > min_found:
-            return INVALID  # quit while youre ahead
+            return failure, -1  # quit while youre ahead
         you.mana -= spell_cost
-        if spell in active_set or you.mana < 0:
-            return INVALID
+        active_effect_spells = [e[0] for e in effects]
+        if spell in active_effect_spells or you.mana < 0:
+            return failure, -1
         # cast spell!
         if spell == Spell.MagicMissile:
             boss.hp -= 4
@@ -118,43 +115,39 @@ def battle(spells):
 
         # End of your turn
         if boss.dead():
-            return (False, True, mana_spent)
+            return victory, mana_spent
 
         # Boss' turn
-        (you, boss, effects, active_set) = apply(you, boss, effects)
+        you, boss, effects = apply(you, boss, effects)
         if boss.dead():
-            return (False, True, mana_spent)
+            return victory, mana_spent
         you.get_hit(boss.dmg)
         # End of boss' turn
         if you.dead():
-            return DEATH
-    return NOT_DONE
+            return failure, -1
+    return stalemate, mana_spent
 
+def run(spells, min_found):
+    result, cost = battle(spells, min_found)
+    if result == failure or (result == victory and cost >= min_found):
+        return min_found
+    if result == victory and cost < min_found:
+        return cost
+    for spell in Spell:
+        sub_min_found = run(spells + [spell], min_found)
+        if sub_min_found < min_found:
+            min_found = sub_min_found
+    return min_found
 
 def part1(spells):
-    global min_found
-    (death, victory, cost) = battle(spells)
-    if death or (victory and cost >= min_found):
-        return
-    elif victory and cost < min_found:
-        min_found = cost
-        print(f"New min found: {min_found}")
-        return
-    for spell in Spell:
-        spells.append(spell)
-        part1(spells)
-        spells.pop()
-
+    print(run([], math.inf)) 
 
 def main():
-    global min_found
     global hard_mode
-    min_found = sys.maxsize
     print("part 1")
     part1([])
     print("part 2")
     hard_mode = True
-    min_found = sys.maxsize
     part1([])
 
 
