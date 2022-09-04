@@ -94,6 +94,8 @@ def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> List[AnyStr]
     """
     return list(map(safe_atoi, split_on(s, regex)))
 
+def only_ints(xs: List):
+    return [n for n in xs if isinstance(n, int)]
 
 # Collections
 

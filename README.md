@@ -53,4 +53,4 @@ What I've completed **in any language**
 - Year 2015: 🎄 DONE!...but doing again in Python! 🌟 IN PROGRESS!
   - Fully solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go)
   - Fully solved in Clojure [valbaca/advent](https://github.com/valbaca/advent)
-  - Days 1-14 and 19-22 in Python here: [advent/year2015](advent/year2015)
+  - Days 1-15 and 19-22 in Python here: [advent/year2015](advent/year2015)
