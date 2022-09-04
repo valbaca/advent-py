@@ -14,6 +14,7 @@ class Wire:
         return self.sig_val
 
     def calc_sign(self):
+        # https://wiki.python.org/moin/BitwiseOperators
         if "AND" in self.splits:
             return sig(self.splits[0]) & sig(self.splits[2])
         elif "OR" in self.splits:
