@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from itertools import permutations
 from sys import maxsize
 
+from advent.elf import read_lines, septoi
+
 # Notes:
 # - dataclass and itertools are great
 # - repeating `self` in classes is tedious, just like `this` in JavaScript (Maybe I miss Ruby/Crystal)
@@ -61,7 +63,8 @@ class Item:
 
     @staticmethod
     def from_line(s):
-        name, cost, dmg, armor = s.split()
+        sp = septoi(s,  r"[^a-zA-Z0-9_+-]")
+        name, cost, dmg, armor = sp
         return Item(name, int(cost), int(dmg), int(armor))
 
 
@@ -75,10 +78,10 @@ def test1():
 
 
 def build_items():
-    lines = list(open("day21.txt", "r"))
+    lines = read_lines(__file__)
     weapons = [Item.from_line(x) for x in lines[1:6]]
-    armor = [Item.from_line(x) for x in lines[8:13]]
-    rings = [Item.from_line(x) for x in lines[15:21]]
+    armor = [Item.from_line(x) for x in lines[7:12]]
+    rings = [Item.from_line(x) for x in lines[13:]]
     # print(weapons, armor, rings)
     armor.append(Item.NO_ITEM)
     rings.append(Item.NO_ITEM)

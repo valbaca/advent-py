@@ -135,13 +135,16 @@ def diff3(val, lo=0, hi=inf, df=1):
     return [x for x in diffs if lo <= x < hi]
 
 def all_around(grid, row, col, df=1):
-    """Return values around row, col in grid (including diagonals) but not grid[row][col] itself"""
+    """Return indexes of items around row, col in grid (including diagonals) but not grid[row][col] itself"""
     lst = []
     for nrow in diff3(row, hi=len(grid), df=df):
         for ncol in diff3(col, hi=len(grid[nrow]), df=df):
             if not (nrow == row and ncol == col):
                 lst.append([nrow, ncol])
     return lst
+
+def all_values_around(grid, row, col, df=1):
+    return [grid[r][c] for r, c in all_around(grid, row, col, df)]
 
 def enumerate_grid(grid):
     return [[rowi, row, coli, col] for rowi, row in enumerate(grid) for coli, col in enumerate(row)]
