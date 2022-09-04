@@ -1,4 +1,5 @@
 # advent-py 🎄🐍
+
 Advent of Code problems solved in Python (3.9+)
 
 - [Advent of Code](https://adventofcode.com/)
@@ -31,12 +32,11 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
   - I'm now looking to get more familiar with Python
   - Python is the #1 language for Advent of Code, and for good reason IMO. Most problems are solved in less than 100 lines of python
   - Compare to other languages, Python has significant advantages:
-    - Python emphasizes the developer's time, which for these problems is a more crucial resource vs execution time 
+    - Python emphasizes the developer's time, which for these problems is a more crucial resource vs execution time
     - vs Java: Python is succinct, direct, and operates on a higher level (and just more fun!)
     - vs Go, Crystal, or Clojure: Python has a better debugger (or has one at all!)
-    - vs Go or Java: Python's `int` (and dynamic typing in-general) is nicer than strict typing 
-    - Python is the slowest language to execute, but that's still fast enough. A "correct" solution typically comes down to using the right algorithm or data structures. 
-
+    - vs Go or Java: Python's `int` (and dynamic typing in-general) is nicer than strict typing
+    - Python is the slowest language to execute, but that's still fast enough. A "correct" solution typically comes down to using the right algorithm or data structures.
 
 ## My Advent Progress
 
@@ -47,15 +47,10 @@ What I've completed **in any language**
 - Year 2019: ❄️ On ice.
 - Year 2018: ❄️ On ice.
 - Year 2017: ❄️ On ice.
-- Year 2016: ❄️ On ice. On day 20.
+- Year 2016: ❄️ On ice.
   - Days 1-7 and day 19 in Python here: [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
 - Year 2015: 🎄 DONE!...but doing again in Python! 🌟 IN PROGRESS!
   - Fully solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go)
   - Fully solved in Clojure [valbaca/advent](https://github.com/valbaca/advent)
-  - Days 1-13 and 19-22 in Python here: [advent/year2015](advent/year2015)
-
-
-
-
-
+  - Days 1-14 and 19-22 in Python here: [advent/year2015](advent/year2015)

@@ -178,6 +178,8 @@ def even(n):
 def product(xs):
     return reduce(lambda x, y: x * y, xs, 1)
 
+def clamp(n, lo, hi):
+    return max(lo, min(n, hi))
 
 # Stealing from:
 # https://math.stackexchange.com/questions/2218763/how-to-find-lcm-of-two-numbers-when-one-starts-with-an-offset
