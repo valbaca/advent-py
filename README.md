@@ -40,8 +40,6 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 
 ## My Advent Progress
 
-What I've completed **in any language**
-
 - Year 2021: 🌟 IN PROGRESS! [advent/year2021](advent/year2021)
 - Year 2020: 🎄 DONE! [advent/year2020](advent/year2020)
 - Year 2019: ❄️ On ice.
@@ -50,7 +48,5 @@ What I've completed **in any language**
 - Year 2016: ❄️ On ice.
   - Days 1-7 and day 19 in Python here: [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
-- Year 2015: 🎄 DONE!...but doing again in Python! 🌟 IN PROGRESS!
-  - Fully solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go)
-  - Fully solved in Clojure [valbaca/advent](https://github.com/valbaca/advent)
-  - Days 1-15 and 19-22 in Python here: [advent/year2015](advent/year2015)
+- Year 2015: 🎄 DONE! [advent/year2015](advent/year2015)
+  - Also solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go) and Clojure [valbaca/advent](https://github.com/valbaca/advent)
