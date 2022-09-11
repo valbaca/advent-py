@@ -8,8 +8,8 @@ python-versions = ">=3.6"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.10"
-content-hash = "c01ed8b8bf34541d805878eb3e4240eef17df332dd70036f32f2070fd0c3f720"
+python-versions = "^3.9"
+content-hash = "947b4f780acb261fcdb5fb45b71e903f5798c5568c98370a26b27d5c07ec525a"
 
 [metadata.files]
 pyyaml = [
