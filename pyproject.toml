@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "advent-py"
+name = "advent"
 version = "0.1.0"
 description = "Advent of Code problems solved in Python"
 authors = ["Valentin Baca <valbaca@gmail.com>"]
