@@ -1,3 +1,7 @@
+# Advent of Code input has been asked to not be put online
+*.txt
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
