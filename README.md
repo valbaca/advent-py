@@ -41,14 +41,14 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 
 ## My Advent Progress
 
-- Year 2022: 🎄 DONE in Kotlin [valbaca/advent-kt](https://github.com/valbaca/advent-kt)
-- Year 2021: 🎄 DONE! [advent/year2021](advent/year2021)
-- Year 2020: 🎄 DONE! [advent/year2020](advent/year2020)
-- Year 2019: ❄️ On ice.
-- Year 2018: ❄️ On ice.
-- Year 2017: ❄️ On ice.
+- Year 2015: 🎄 DONE! [advent/year2015](advent/year2015)
+  - Also solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go) and Clojure [valbaca/advent](https://github.com/valbaca/advent)
 - Year 2016: ❄️ On ice.
   - Days 1-7 and day 19 in Python here: [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
-- Year 2015: 🎄 DONE! [advent/year2015](advent/year2015)
-  - Also solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go) and Clojure [valbaca/advent](https://github.com/valbaca/advent)
+- Year 2017: ❄️ On ice.
+- Year 2018: ❄️ On ice.
+- Year 2019: ❄️ On ice.
+- Year 2020: 🎄 DONE! [advent/year2020](advent/year2020)
+- Year 2021: 🎄 DONE! [advent/year2021](advent/year2021)
+- Year 2022: 🎄 DONE in Kotlin [valbaca/advent-kt](https://github.com/valbaca/advent-kt)
