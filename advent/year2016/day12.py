@@ -8,9 +8,12 @@ def main():
     print("Part 1:", part1(lines))
     print("Part 2:", part2(lines))
 
-def exec(lines, reg=defaultdict(int)):
-    def var(x):
-        return x if isinstance(x, int) else reg[x]
+def exec(lines, reg=None):
+    if reg is None:
+        reg = defaultdict(int)
+
+    def var(v):
+        return v if isinstance(v, int) else reg[v]
     ins = [elf.septoi(line) for line in lines]
     ip = 0
     while 0 <= ip < len(ins):
@@ -18,7 +21,7 @@ def exec(lines, reg=defaultdict(int)):
         x = var(cmd[1])
         match cmd[0]:
             case 'cpy':
-                reg[cmd[2]] = x if isinstance(x, int) else reg[x]
+                reg[cmd[2]] = x
             case 'inc':
                 reg[cmd[1]] += 1
             case 'dec':
