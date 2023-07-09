@@ -94,8 +94,10 @@ def septoi(s: AnyStr, regex: Pattern[AnyStr] = r"[^a-zA-Z0-9-]") -> List[AnyStr]
     """
     return list(map(safe_atoi, split_on(s, regex)))
 
+
 def only_ints(xs: List):
     return [n for n in xs if isinstance(n, int)]
+
 
 # Collections
 
@@ -131,8 +133,9 @@ def around_indexes(grid, r, c):
 
 def diff3(val, lo=0, hi=inf, df=1):
     """Return list [val-df, val, val+df], clamped to [lo, hi)"""
-    diffs = [val-df, val, val+df]
+    diffs = [val - df, val, val + df]
     return [x for x in diffs if lo <= x < hi]
+
 
 def all_around(grid, row, col, df=1):
     """Return indexes of items around row, col in grid (including diagonals) but not grid[row][col] itself"""
@@ -143,19 +146,24 @@ def all_around(grid, row, col, df=1):
                 lst.append([nrow, ncol])
     return lst
 
+
 def all_values_around(grid, row, col, df=1):
     return [grid[r][c] for r, c in all_around(grid, row, col, df)]
 
+
 def enumerate_grid(grid):
     return [[rowi, row, coli, col] for rowi, row in enumerate(grid) for coli, col in enumerate(row)]
+
 
 def iter_grid_values(grid):
     """Gives [row, col] value pairs for grid"""
     return [[row, col] for row in grid for col in row]
 
+
 def iter_grid_indexes(grid):
     """Gives [rowi, coli] index pairs for grid"""
     return [[r, c] for r in range(len(grid)) for c in range(len(grid[r]))]
+
 
 def transpose(m):
     """
@@ -183,8 +191,10 @@ def even(n):
 def product(xs):
     return reduce(lambda x, y: x * y, xs, 1)
 
+
 def clamp(n, lo, hi):
     return max(lo, min(n, hi))
+
 
 # Stealing from:
 # https://math.stackexchange.com/questions/2218763/how-to-find-lcm-of-two-numbers-when-one-starts-with-an-offset
@@ -251,3 +261,23 @@ def between(x, x1, x2):
     x1 and x2 can be in any order, allowing: between(0, 1, -1) == True
     If you want ordered, just use x1 <= x <= x2"""
     return x1 <= x <= x2 or x2 <= x <= x1
+
+
+# Numpy related
+
+import numpy as np
+
+
+def lines_to_np_array(lines):
+    max_length = max(len(line) for line in lines)
+    num_lines = len(lines)
+
+    # Create a 2D NumPy array of characters filled with whitespace
+    array = np.empty((num_lines, max_length), dtype=np.dtype('U1'))
+    array.fill(' ')
+
+    # Fill the array with characters from the text
+    for i, line in enumerate(lines):
+        array[i, :len(line)] = list(line)
+
+    return array
