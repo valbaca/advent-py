@@ -1,9 +1,8 @@
 # advent-py 🎄🐍
 
-Advent of Code problems solved in Python (3.9+)
+Advent of Code problems solved in Python
 
 - [Advent of Code](https://adventofcode.com/)
-- Even though Python 3.10 is available, I'm sticking with 3.9 because of [pypy support for M1 Mac Silicon](https://www.pypy.org/posts/2022/07/m1-support-for-pypy.html)
 
 ## Running
 

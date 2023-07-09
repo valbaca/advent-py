@@ -1,5 +1,7 @@
 # Advent of Code input has been asked to not be put online
 *.txt
+# but we need python stuff
+!requirements.txt
 
 
 # Byte-compiled / optimized / DLL files
@@ -24,10 +26,7 @@ parts/
 sdist/
 var/
 wheels/
-<<<<<<< HEAD
-=======
 pip-wheel-metadata/
->>>>>>> origin/main
 share/python-wheels/
 *.egg-info/
 .installed.cfg
