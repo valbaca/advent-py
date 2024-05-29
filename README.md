@@ -43,7 +43,7 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 - Year 2015: 🎄 DONE! [advent/year2015](advent/year2015)
   - Also solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go) and Clojure [valbaca/advent](https://github.com/valbaca/advent)
 - Year 2016: 🎄 DONE!
-  - Days 1-8, 12, 19, 22-25 in Python here: [advent/year2016](advent/year2016)
+  - Days 1-9, 12, 19, 22-25 in Python here: [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
 - Year 2017: ❄️ On ice.
 - Year 2018: ❄️ On ice.
