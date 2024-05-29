@@ -8,7 +8,6 @@ It reads more like how you would describe
 """
 
 
-
 def main():
     test_lines = elf.read_lines(__file__, test=True)
     lines = elf.read_lines(__file__)

@@ -1,4 +1,5 @@
 from collections import namedtuple
+
 from advent import elf
 
 
@@ -21,14 +22,16 @@ def part1(lines):
         execute(ons, seps)
     return len(ons)
 
+
 def in_cube(lo, hi):
     # Given input values, returns a python range
     if lo > 50 or hi < -49:
         return []
     return range(
         max(lo, -50),
-        min(hi+1, 51)
+        min(hi + 1, 51)
     )
+
 
 def execute(ons: set, seps):
     # ['on', 'x', -20, 26, 'y', -36, 17, 'z', -47, 7]
@@ -38,12 +41,14 @@ def execute(ons: set, seps):
                 if seps[0] == 'on':
                     ons.add((x, y, z))
                 else:
-                    ons.discard((x,y,z))
+                    ons.discard((x, y, z))
+
 
 # Part 2 start...
 
 Cube = namedtuple('Cube', 'x y z')
 FCube = namedtuple('FCube', 'flip cube')
+
 
 def part2(lines):
     flip_cubes = [line_to_flip_cube(line) for line in lines]
@@ -63,24 +68,27 @@ def part2(lines):
         ons += new_cubes
     return count_on(ons)
 
+
 def count_on(ons: list[FCube]):
     count = 0
     for on in ons:
         cube: Cube = on.cube
         count += ((1 if on.flip == 'on' else -1) * (
-            (cube.x[1] - cube.x[0]+1) * (cube.y[1] - cube.y[0]+1) * (cube.z[1] - cube.z[0]+1) ))
+                (cube.x[1] - cube.x[0] + 1) * (cube.y[1] - cube.y[0] + 1) * (cube.z[1] - cube.z[0] + 1)))
     return count
+
 
 def line_to_flip_cube(line) -> FCube:
     seps = elf.septoi(line)
     # ['on', 'x', -20, 26, 'y', -36, 17, 'z', -47, 7]
     return FCube(
-        seps[0], 
+        seps[0],
         Cube(
-            (seps[2], seps[3]), # x
-            (seps[5], seps[6]), # y
-            (seps[8], seps[9]), # z
+            (seps[2], seps[3]),  # x
+            (seps[5], seps[6]),  # y
+            (seps[8], seps[9]),  # z
         ))
+
 
 def overlap_cube(a: Cube, b: Cube):
     # given two cubes determines overlap
@@ -90,6 +98,7 @@ def overlap_cube(a: Cube, b: Cube):
     if size == 0:
         return size, None
     return size, Cube(*[overlap[1] for overlap in overlaps])
+
 
 def overlap(c, d):
     # given two ranges, returns their overlap size and overlap
@@ -101,20 +110,20 @@ def overlap(c, d):
         return 0, ()
     # c fully within d, then overlap is simply c
     if c[0] >= d[0] and c[1] <= d[1]:
-        return c[1]-c[0]+1, c
+        return c[1] - c[0] + 1, c
     # d fully within d, then overlap is simply d
     if d[0] >= c[0] and d[1] <= c[1]:
-        return d[1]-d[0]+1, d
+        return d[1] - d[0] + 1, d
     # c[0] is "lo" of overlap if it's within d
     if d[0] <= c[0] <= d[1]:
         lo = c[0]
         hi = min(c[1], d[1])
-        return hi-lo+1, (lo, hi)
+        return hi - lo + 1, (lo, hi)
     else:
         lo = d[0]
         hi = min(c[1], d[1])
-        return hi-lo+1, (lo, hi)
-    
+        return hi - lo + 1, (lo, hi)
+
 
 if __name__ == '__main__':
     main()

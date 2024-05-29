@@ -1,7 +1,9 @@
 from advent.elf import read_lines
 
+
 def part1(input):
     return len(see_say(input[0], 40))
+
 
 def see_say(s, n):
     for _ in range(n):
@@ -18,8 +20,10 @@ def see_say(s, n):
         s = f"{new}{count}{last}"
     return new
 
+
 def part2(input):
-    return len(see_say(input[0], 50)) # whew! was worried it would go out of memory
+    return len(see_say(input[0], 50))  # whew! was worried it would go out of memory
+
 
 if __name__ == "__main__":
     print(part1(read_lines(__file__)))

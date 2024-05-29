@@ -1,8 +1,8 @@
 import bisect
 import re
 from functools import reduce
-from typing import AnyStr, Pattern, List
 from math import inf
+from typing import AnyStr, Pattern, List
 
 """
 An elf is Santa's little helper, so elf.py has helper functions!

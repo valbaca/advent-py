@@ -1,4 +1,5 @@
 from functools import cache
+
 from advent.elf import read_lines
 
 
@@ -50,12 +51,14 @@ def has_double_pair(s):
 def meets_reqs(s):
     return has_straight(s) and has_double_pair(s)
 
+
 @cache
 def next_password(s):
     s = inc(s)
     while not meets_reqs(s):
         s = inc(s)
     return s
+
 
 def part1(input):
     return next_password(input[0])

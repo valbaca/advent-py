@@ -1,12 +1,14 @@
 from advent.elf import read_lines, septoi
 
+
 class Wire:
     WIRES = {}
+
     def __init__(self, s):
         self.s = s
         self.splits = septoi(s, r"[ >-]")
         self.id = self.splits[-1]
-        self.sig_val = None # signal value
+        self.sig_val = None  # signal value
         Wire.WIRES[self.id] = self
 
     def signal(self) -> int:
@@ -33,7 +35,9 @@ class Wire:
             return val
         return Wire.WIRES[val].signal()
 
+
 sig = Wire.sig
+
 
 def part1(input):
     for line in input:
@@ -45,7 +49,7 @@ def part2(input):
     prev_a = part1(input)
     for line in input:
         Wire(line)
-    Wire.WIRES["b"].sig_val = prev_a # hook in the prev value
+    Wire.WIRES["b"].sig_val = prev_a  # hook in the prev value
     return Wire.WIRES["a"].signal()
 
 

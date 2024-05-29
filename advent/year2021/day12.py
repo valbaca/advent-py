@@ -4,6 +4,7 @@ from advent import elf
 
 """TIL: careful with set("string") as it will expand out the string and put the chars into the set"""
 
+
 def main():
     test_lines = elf.read_lines(__file__, test=True)
     test_lines2 = elf.read_lines("day12-test2.txt", test=True)
@@ -35,8 +36,10 @@ def parse(lines):
         graph[to].append(frm)
     return graph
 
+
 def is_small(id):
     return str.islower(id)
+
 
 def gen_opts(graph, path, seen):
     last = path[-1]
@@ -47,6 +50,7 @@ def gen_opts(graph, path, seen):
             nxt_seen.add(nxt)
             opts.append(([*path, nxt], nxt_seen))
     return opts
+
 
 def part1(lines):
     graph = parse(lines)
@@ -79,9 +83,10 @@ def gen_opts2(graph, path, seen, twice):
             # can use a single twice visit
             nxt_seen = seen.copy()
             nxt_seen.add(nxt)
-            nxt_twice = is_small(nxt) and nxt in seen # is this a "twice" visit?
+            nxt_twice = is_small(nxt) and nxt in seen  # is this a "twice" visit?
             opts.append(([*path, nxt], nxt_seen, nxt_twice))
     return opts
+
 
 def part2(lines):
     graph = parse(lines)

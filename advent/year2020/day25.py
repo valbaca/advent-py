@@ -1,6 +1,3 @@
-from advent import elf
-
-
 def main():
     # [Card PK, Door PK]
     pub_keys = [5764801, 17807724]

@@ -1,5 +1,6 @@
-from advent import elf
 from collections import deque
+
+from advent import elf
 
 
 def main():

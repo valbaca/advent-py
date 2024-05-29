@@ -5,6 +5,7 @@ import networkx as nx
 
 from advent import elf
 
+
 # Now this one was fun. Really got to flex with numpy and networkx here.
 
 def main():

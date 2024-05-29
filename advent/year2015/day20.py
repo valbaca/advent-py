@@ -1,5 +1,5 @@
-from itertools import count
 import math
+from itertools import count
 
 # TIL:
 # python has the usual % operator

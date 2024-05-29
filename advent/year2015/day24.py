@@ -1,10 +1,13 @@
 import itertools
 import math
+
 from advent.elf import product, read_lines, safe_atoi
+
 
 def part1(input):
     ns = [safe_atoi(line) for line in input]
     return solve(ns, 3)
+
 
 def solve(ints, slots):
     target = sum(ints) // slots
@@ -17,6 +20,7 @@ def solve(ints, slots):
         minPkgs, ent = combs(ints, i, target, minPkgs, ent)
     return minPkgs, ent
 
+
 def combs(ints, i, target, minPkgs, ent):
     for viable in viable_combs(ints, i, target):
         if len(viable) < minPkgs:
@@ -27,12 +31,15 @@ def combs(ints, i, target, minPkgs, ent):
                 ent = viable_ent
     return minPkgs, ent
 
+
 def viable_combs(ints, i, target):
     return [c for c in itertools.combinations(ints, i) if sum(c) == target]
+
 
 def part2(input):
     ns = [safe_atoi(line) for line in input]
     return solve(ns, 4)
+
 
 if __name__ == "__main__":
     print(part1(read_lines(__file__)))

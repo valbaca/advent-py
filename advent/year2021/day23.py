@@ -1,11 +1,11 @@
 import heapq
-import os
 import string
 from collections import defaultdict, deque
 from dataclasses import dataclass
 from heapq import heappush, heappop
 
 from advent import elf
+
 """
 THIS ONE SUUUUCKED.
 I seriously put this one off for half a year and even then it took two near-full days of attempts.
@@ -15,6 +15,7 @@ Python makes it easy to get started but also easy to get stuck with stupid bugs
 
 But mostly, this problem was just a huge pain. So glad I powered through it and solved it on my own though! 
 """
+
 
 def main():
     test_lines = elf.read_lines(__file__, test=True)
@@ -335,7 +336,7 @@ def travel_logic2(node, name, pm, room_cap="123"):  # return (is_legal, is_end)
         if prev[0] != name[0]:  # not match, allowed to only leave
             if is_entering:
                 return False, False  # wrong room
-            return True, False # leaving okay
+            return True, False  # leaving okay
         if is_entering:
             dst_idx = room_cap.index(dst[1])
             below_pos = [dst[0] + i for i in room_cap[dst_idx + 1:]]

@@ -1,5 +1,6 @@
 from advent import elf
 
+
 def main():
     test_lines = elf.read_lines(__file__, test=True)
     lines = elf.read_lines(__file__)
@@ -16,13 +17,16 @@ def main():
 def parse(lines):
     return [elf.int_list(line) for line in lines]
 
+
 def inc(grid, row, col):
     grid[row][col] += 1
     if grid[row][col] == 10:
         for [nrow, ncol] in elf.all_around(grid, row, col):
             inc(grid, nrow, ncol)
 
+
 STEPS = 100
+
 
 def part1(lines):
     grid = parse(lines)

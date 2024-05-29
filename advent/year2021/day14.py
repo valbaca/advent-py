@@ -96,7 +96,7 @@ def part2(lines):
     counts = recur(start, 40)
     counts[start[-1]] += 1
     comms = counts.most_common()
-    return comms[0][1] - comms[-1][1] # max_count - min_count
+    return comms[0][1] - comms[-1][1]  # max_count - min_count
 
 
 if __name__ == '__main__':

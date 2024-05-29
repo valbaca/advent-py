@@ -1,7 +1,9 @@
 from advent.elf import even, read_lines, septoi
 
+
 def part1(input):
     return exec(input)
+
 
 def exec(input, a_start=0):
     input = [septoi(line, r"[, ]") for line in input]
@@ -31,6 +33,7 @@ def exec(input, a_start=0):
 
 def part2(input):
     return exec(input, 1)
+
 
 if __name__ == "__main__":
     print(part1(read_lines(__file__)))

@@ -19,22 +19,23 @@ def exec(lines, reg=None):
 
     def var(v):
         return v if isinstance(v, int) else reg[v]
+
     ins = [elf.septoi(line) for line in lines]
     ip = 0
     while 0 <= ip < len(ins):
         cmd = ins[ip]
-        x, xv = cmd[1], var(cmd[1]) # x (the arg, str or int) and x_value (int)
+        x, xv = cmd[1], var(cmd[1])  # x (the arg, str or int) and x_value (int)
         match cmd[0]:
-            case 'cpy': # 2-arg
+            case 'cpy':  # 2-arg
                 if isinstance(y := cmd[2], str):
                     reg[y] = xv
-            case 'inc': # 1-arg
+            case 'inc':  # 1-arg
                 if isinstance(x, str):
                     reg[x] += 1
-            case 'dec': # 1-arg
+            case 'dec':  # 1-arg
                 if isinstance(x, str):
                     reg[x] -= 1
-            case 'jnz': # 2-arg
+            case 'jnz':  # 2-arg
                 if xv != 0:
                     ip += var(cmd[2])
                     continue
@@ -53,6 +54,7 @@ def exec(lines, reg=None):
         ip += 1
     return reg
 
+
 def part1(lines):
     reg = defaultdict(int)
     reg['a'] = 7
@@ -62,8 +64,8 @@ def part1(lines):
 def part2(lines):
     # okay, cheated again. Really got spoiled while looking for hints
     all_nums = [n for line in lines
-                  for n in elf.septoi(line) if isinstance(n, int)]
-    mx = sorted(all_nums)[-2:] # find the big constants
+                for n in elf.septoi(line) if isinstance(n, int)]
+    mx = sorted(all_nums)[-2:]  # find the big constants
     return math.factorial(12) + (mx[0] * mx[1])
 
 

@@ -4,6 +4,7 @@ from sys import maxsize
 
 from advent.elf import read_lines, septoi
 
+
 # Notes:
 # - dataclass and itertools are great
 # - repeating `self` in classes is tedious, just like `this` in JavaScript (Maybe I miss Ruby/Crystal)
@@ -63,7 +64,7 @@ class Item:
 
     @staticmethod
     def from_line(s):
-        sp = septoi(s,  r"[^a-zA-Z0-9_+-]")
+        sp = septoi(s, r"[^a-zA-Z0-9_+-]")
         name, cost, dmg, armor = sp
         return Item(name, int(cost), int(dmg), int(armor))
 

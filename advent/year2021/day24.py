@@ -4,6 +4,8 @@ from advent import elf
 TIL: Pencil and paper (or Apple Pencil and iPad) and patience is all you need.
 Oh, and don't make stupid algebra errors.
 """
+
+
 def main():
     test_lines = elf.read_lines(__file__, test=True)
     lines = elf.read_lines(__file__)
@@ -15,6 +17,7 @@ def main():
     # print(part2(test_lines))
     # print("Part 2:")
     # print(part2(lines))
+
 
 def alu(vrs: dict, s: str, inp: list):
     args = s.split(" ")
@@ -38,6 +41,7 @@ def alu(vrs: dict, s: str, inp: list):
         elif op == "eql":
             vrs[a] = 1 if vrs[a] == b else 0
 
+
 def run_alu(lines, s: str, z=0):
     inp = list(s)
     vrs = {"w": 0, "x": 0, "y": 0, "z": z}
@@ -45,7 +49,6 @@ def run_alu(lines, s: str, z=0):
         alu(vrs, line, inp)
         # print(vrs)
     return vrs["z"]
-
 
 
 def part1(lines):
@@ -64,7 +67,8 @@ def part1(lines):
         print(f"Digit {13 - ci} w={w}")
         z_res = run_alu(chunk, w, z)
         z = z_res
-        print(f"z={z} z/26={z//26} z%26={z%26}")
+        print(f"z={z} z/26={z // 26} z%26={z % 26}")
+
 
 def part2(lines):
     ...

@@ -6,6 +6,7 @@ the "left" and "right" numbers was what really solidified things.
 I also avoided using a Box for whatever reason, ended up making things much much easier.
 """
 
+
 def main():
     lines = elf.read_lines(__file__)
     print("Part 1:")
@@ -37,15 +38,16 @@ def part2(lines):
 class Box:
     def __init__(self, val):
         self.val = val
-    
+
     def add_val(self, val):
         self.val += val
 
     def magnitude(self):
         return self.val
-    
+
     def __str__(self):
         return f"{self.val}"
+
 
 class Pair:
     def __init__(self, left, right):
@@ -67,8 +69,7 @@ class Pair:
                 break
             p += 1
         p = comma_pos
-        return Pair(Pair.parse(s[1:p]), Pair.parse(s[p+1:-1]))
-    
+        return Pair(Pair.parse(s[1:p]), Pair.parse(s[p + 1:-1]))
 
     def add(left, right):
         p = Pair(left, right)
@@ -124,7 +125,6 @@ class Pair:
             ret.extend(self.right.in_order())
         return ret
 
-
     def add_to_offset(self, offset, mid, val):
         in_orders = self.in_order()
         idx = in_orders.index(mid)
@@ -162,7 +162,7 @@ class Pair:
 
     def magnitude(self):
         return 3 * self.left.magnitude() + 2 * self.right.magnitude()
-        
+
     def __str__(self):
         return f"[{self.left},{self.right}]"
 
@@ -174,7 +174,8 @@ def split_num(n):
     if elf.even(n):
         return (n // 2), (n // 2)
     else:
-        return (n // 2) , ((n //2 )+ 1) # round down, round up
+        return (n // 2), ((n // 2) + 1)  # round down, round up
+
 
 if __name__ == '__main__':
     main()

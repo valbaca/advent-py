@@ -1,6 +1,6 @@
 import math
-from enum import Enum
 from dataclasses import dataclass
+from enum import Enum
 
 # TIL:
 # - globals are just defined and can be read
@@ -23,6 +23,8 @@ def backtrack(args):
 """
 
 hard_mode = False
+
+
 class Spell(Enum):
     MagicMissile = ("Magic Missile", 53)
     Drain = ("Drain", 73)
@@ -52,6 +54,7 @@ class Boss:
     def dead(self):
         return self.hp <= 0
 
+
 @dataclass
 class State:
     you: You
@@ -66,6 +69,7 @@ class State:
             self.effects.copy(),
             self.mana_spent
         )
+
 
 def apply(state):
     you, boss, effects = state.you, state.boss, state.effects
@@ -92,6 +96,7 @@ def apply(state):
 failure = "failure"
 stalemate = "stalemate"
 victory = "victory"
+
 
 # apply the spell and execute one round of combat, returns result and resulting state
 def apply_spell(state: State, spell, min_found):
@@ -137,6 +142,7 @@ def apply_spell(state: State, spell, min_found):
         return failure, None
     return stalemate, state
 
+
 def combat(state: State, min_found):
     for spell in Spell:
         result, restate = apply_spell(state.clone(), spell, min_found)
@@ -151,11 +157,11 @@ def combat(state: State, min_found):
             min_found = sub_min_found
     return min_found
 
+
 def part1():
     # init_state = State(You(10, 250, 0), Boss(13, 8), {}, 0) # example
-    init_state = State( You(50, 500, 0), Boss(58, 9), {}, 0)
+    init_state = State(You(50, 500, 0), Boss(58, 9), {}, 0)
     print(combat(init_state, math.inf))
-
 
 
 def main():

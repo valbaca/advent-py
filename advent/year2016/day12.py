@@ -8,12 +8,14 @@ def main():
     print("Part 1:", part1(lines))
     print("Part 2:", part2(lines))
 
+
 def exec(lines, reg=None):
     if reg is None:
         reg = defaultdict(int)
 
     def var(v):
         return v if isinstance(v, int) else reg[v]
+
     ins = [elf.septoi(line) for line in lines]
     ip = 0
     while 0 <= ip < len(ins):
@@ -33,8 +35,10 @@ def exec(lines, reg=None):
         ip += 1
     return reg
 
+
 def part1(lines):
     return exec(lines)['a']
+
 
 def part2(lines):
     reg = defaultdict(int)

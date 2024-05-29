@@ -1,7 +1,10 @@
 import advent.elf as elf
+
 """TIL no ++ or -- in Python
 enumerate to loop with index (more like C-style for-loop)
 """
+
+
 def part1(s):
     """Returns which floor Santa ends up on."""
     total = 0
@@ -11,6 +14,7 @@ def part1(s):
         elif c == ')':
             total -= 1
     return total
+
 
 def part2(s):
     """Return the pos of the command that puts Santa on -1"""
@@ -23,6 +27,7 @@ def part2(s):
         if total == -1:
             return pos
     return -1
+
 
 if __name__ == '__main__':
     print(part1(elf.read_lines(__file__)[0]))

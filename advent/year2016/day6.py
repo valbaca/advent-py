@@ -1,5 +1,6 @@
-from advent import elf
 from collections import Counter
+
+from advent import elf
 
 
 def main():
@@ -12,6 +13,7 @@ def main():
     print("Part 2 (test):", part2(test_lines))
     print("Part 2:", part2(lines))
 
+
 def count_line_chars(lines):
     line_len = len(lines[0])
     counts = [Counter() for _ in range(line_len)]
@@ -23,7 +25,6 @@ def count_line_chars(lines):
 
 def part1(lines):
     return ''.join((count.most_common()[0][0] for count in count_line_chars(lines)))
-
 
 
 def part2(lines):

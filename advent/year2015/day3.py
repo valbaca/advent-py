@@ -22,6 +22,7 @@ def visit(s):
         seen.add(pos)
     return seen
 
+
 def part2(input):
     s = input[0]
     santa, robo = "".join(s[::2]), "".join(s[1::2])
