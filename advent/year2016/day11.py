@@ -1,7 +1,39 @@
 import math
 import time
 from dataclasses import dataclass
-from functools import cached_property
+
+"""
+FINALLY got this to run in less than a second.
+Few key things (or really one major thing in multiple expressions):
+PRUNE the potential space!
+
+This is done in several ways:
+1. Make the representation hashable, so it can be put into a set. This is done by making Building just (int, post) where
+pos is a tuple (containing tuple pairs of where the generator and microchip are)
+2. Using that, we can also easily represent the "functionally equivalent" states. It turns out the elements are a red-
+herring; the names don't matter. So ((0,2), (1,2)) == ((1,2), (0,2)). This allows us to "normalize" the states by simply
+sorting the position tuple, so ((1,2), (0,2)) becomes ((0,2), (1,2)) and now the set is even more useful!
+3. Finally, avoid poor "steps". As in avoid moving just one thing up a floor when you could move two or moving two 
+things down, or moving *anything* down if it's unnecessary.
+4. Using my "Radix Queue" I'm able to both keep track of the # of steps easily AND ensure I find the optimal solution.
+It greatly helps that the value we're optimizing (steps) is only ever increasing, so we never have to go back.
+
+#1 above is the most important, as it enables the rest.
+
+I went through several different ways to represent the data:
+- List of lists representing the floors and what was on the floor
+- List of enum sets representing the floors and what was on the floor
+- Two sets (generators and microchips) for where they were
+- Finally landing on the tuple/list of generator-microchip floor location pairs
+
+This is all what makes Advent of Code great.
+You find that the straightforward way of representing the problem in code (e.g. list of floors) makes finding the soln
+difficult. So you refactor and rearrange and invert and flip the data structures around.
+
+These can be solved in any language but Python is especially well suited for completely changing the representation easily
+
+The common refrain is "Python is slow" and while a Java equivalent would run faster, GETTING there in Python IS FASTER. 
+"""
 
 
 def main():
@@ -19,235 +51,153 @@ def main():
 
 
 FLOORS = 4
-LAST_FLOOR = FLOORS - 1
-names = {
-    0: 'Po',  # polonium
-    1: 'Tm',
-    2: 'Pm',  # promethium
-    3: 'R',
-    4: 'C',
-    5: 'E',  # elerium
-    6: 'D',  # dilithium
-}
+TOP_FLOOR = FLOORS - 1
+
+
+def add_in(tupe, diff, idx1, idx2):
+    """Updates "within" a tuple (returning a new tuple)"""
+    lst = list(tupe)
+    lst[idx1] = tuple(
+        orig + diff if idx == idx2 else orig
+        for idx, orig in enumerate(lst[idx1])
+    )
+    return tuple(lst)
 
 
 @dataclass(unsafe_hash=True, frozen=True)
 class Building:
-    steps: int
     elev: int
-    gens: tuple  # maps generators to the floor its on; optimizing for size
-    mics: tuple
+    pos: tuple  # ((<gen1 position>, <chip1 position>), etc)
+
+    def normalize(self):
+        return Building(self.elev, tuple(sorted(self.pos)))
 
     def solved(self):
-        if self.elev != LAST_FLOOR:
+        if self.elev != TOP_FLOOR:
             return False
-        for gen_floor in self.gens:
-            if gen_floor != LAST_FLOOR:
-                return False
-        for mic_floor in self.mics:
-            if mic_floor != LAST_FLOOR:
+        for gen_f, mic_f in self.pos:
+            if gen_f != TOP_FLOOR or mic_f != TOP_FLOOR:
                 return False
         return True
 
     def safe(self):
         gens_by_floor, mics_by_floor = self.by_floor()
         for fn in range(FLOORS):
-            chips = mics_by_floor[fn]
-            if not chips:
+            mics = mics_by_floor[fn]
+            if not mics:
                 continue
             gens = gens_by_floor[fn]
             if not gens:
                 continue
-            if len(set(chips) - set(gens)) > 0:
+            if len(mics - gens) > 0:
                 return False
         return True
 
-    def floor_safe(self, floor):
-        chips = set(mic_id for mic_id, mic_floor in enumerate(self.mics) if mic_floor == floor)
-        if not chips:
-            return True
-        gens = set(gen_id for gen_id, gen_floor in enumerate(self.gens) if gen_floor == floor)
-        if not gens:
-            return True
-        return len(chips - gens) == 0
-
-    def move(self, dst, *items):
-        if not (0 <= dst < FLOORS):
-            return None
-        new_gens = list(self.gens)
-        new_mics = list(self.mics)
-        for item_type, item_name in items:
-            if item_type == 'G':
-                new_gens[item_name] = dst
-            else:
-                new_mics[item_name] = dst
-
-        moved = Building(
-            steps=self.steps + 1,
-            elev=dst,
-            gens=tuple(new_gens),
-            mics=tuple(new_mics)
-        )
-        if not moved.safe():
-            return None
-        return moved
-
-    def generate_options(self):
+    def generate_options(self, seen):
         options = []
-        gens_by_floor, mics_by_floor = self.on_floor(self.elev)
-        go_below = False  # avoid moving items down a floor unless necessary
-        if 0 < self.elev:
-            gens_below, mics_below = self.on_floor(self.elev - 1)
-            go_below = len(gens_below) + len(mics_below) > 0
-        moves = [('G', gen_id) for gen_id in gens_by_floor] + [('M', mic_id) for mic_id in mics_by_floor]
-        for move in moves:
+        go_above = self.elev < TOP_FLOOR
+        go_below = self.elev > 0 and any(
+            gen_pos == self.elev - 1 or mic_pos == self.elev - 1 for gen_pos, mic_pos in self.pos)
 
-            for second_move in moves[:]:
-                if move == second_move:
-                    continue
-                options.append(self.move(self.elev + 1, move, second_move))
-                # options.append(self.move(self.elev - 1, move, second_move)) # SKIP! Optimization
-            # options.append(self.move(self.elev + 1, move)) # SKIP! Optimization
+        poss = []  # possibilities
+        for idx, (gen_pos, mic_pos) in enumerate(self.pos):
+            if gen_pos == self.elev:
+                poss.append((idx, 0))
+            if mic_pos == self.elev:
+                poss.append((idx, 1))
+        for poss_idx, (idx, gen_or_mic) in enumerate(poss):
+            if go_above:
+                mut_pos = add_in(self.pos, 1, idx, gen_or_mic)
+                options.append(Building(self.elev + 1, mut_pos))
+                if poss_idx != len(poss) - 1:
+                    for sec_idx, sec_gen_or_mic in poss[poss_idx + 1:]:
+                        inner_pos = add_in(mut_pos, 1, sec_idx, sec_gen_or_mic)
+                        options.append(Building(self.elev + 1, inner_pos))
             if go_below:
-                options.append(self.move(self.elev - 1, move))
+                options.append(Building(self.elev - 1, add_in(self.pos, -1, idx, gen_or_mic)))
 
-        return (option for option in options if option is not None)
-
-    @cached_property
-    def score(self):
-        total = 0
-        for gen_floor in self.gens:
-            total += (3 << gen_floor)
-        for mic_floor in self.mics:
-            total += (2 << mic_floor)
-        return -total
-
-    def __lt__(self, other):
-        if self.steps < other.steps:
-            return True
-        elif self.steps > other.steps:
-            return False
-        else:
-            our_score, other_score = self.score, other.score
-            if our_score < other_score:
-                return True
-            elif our_score > other_score:
-                return False
-            else:
-                return False  # tiebreaker?
+        return set(option.normalize() for option in options if option.safe()) - seen
 
     def by_floor(self):
-        gens_by_floor, mics_by_floor = [[] for _ in range(FLOORS)], [[] for _ in range(FLOORS)]
-        for gen_id, floor in enumerate(self.gens):
-            gens_by_floor[floor].append(gen_id)
-        for mic_id, floor in enumerate(self.mics):
-            mics_by_floor[floor].append(mic_id)
+        gens_by_floor, mics_by_floor = [set() for _ in range(FLOORS)], [set() for _ in range(FLOORS)]
+        for idx, (gen_f, mic_f) in enumerate(self.pos):
+            gens_by_floor[gen_f].add(idx)
+            mics_by_floor[mic_f].add(idx)
         return gens_by_floor, mics_by_floor
-
-    def on_floor(self, floor_num):
-        """Returns set(gens), set(mics) where the floor matches the given floor"""
-        return set(gen_id for gen_id, floor in enumerate(self.gens) if floor == floor_num), set(
-            mic_id for mic_id, floor in enumerate(self.mics) if floor == floor_num),
-
-    def __str__(self):
-        s = []
-        gens_by_floor, mics_by_floor = self.by_floor()
-        for floor in range(FLOORS):
-            floor_str = (" ".join([str(names[gen]) + "G" for gen in gens_by_floor[floor]])
-                         + " ".join([str(names[mic]) + "M" for mic in mics_by_floor[floor]]))
-            s.append(f"F{floor + 1} {'E' if self.elev == floor else '.'} {floor_str}")
-        s.append(f"{self.steps=} {self.score=}")
-        return "\n".join(reversed(s))
 
 
 class RadixQueue:
     """Rather than using a heap, using a list where the index is the # of steps a building takes.
     This ensures we're working on the fastest solutions and can pull the next immediately"""
+
     def __init__(self):
         self.queue = [[]]
-        self.last_pop = 0
 
     def first_with_item(self):
         for idx, arr in enumerate(self.queue):
             if len(arr) > 0:
-                if idx != self.last_pop:
-                    self.last_pop = idx
                 return idx, arr
         return None, None
 
     def is_empty(self):
-        if self.first_with_item() == (None, None):
-            return True
+        return self.first_with_item() == (None, None)
 
     def push_all(self, index, items):
         while len(self.queue) <= index:
             self.queue.append([])
         self.queue[index].extend(items)
 
-    def pop(self):
-        _, arr = self.first_with_item()
-        return arr.pop()
-
 
 def runner(init):
+    init = init.normalize()
     queue = RadixQueue()
-    queue.push_all(init.steps, [init])
+    queue.push_all(0, [init])
     seen = {init}
     min_steps = math.inf
     while not queue.is_empty():
-        b = queue.pop()
-        if min_steps <= b.steps:
+        idx, arr = queue.first_with_item()
+        b = arr.pop()
+        # b = queue.pop()
+        if min_steps <= idx:
             continue
         if b.solved():
-            min_steps = b.steps
+            min_steps = idx
             # print(f"New min!: {min_steps}")
             continue
-        options = b.generate_options()
-        unseen = set(options) - seen
-        seen.update(unseen)
-        queue.push_all(b.steps + 1, unseen)
+        options = b.generate_options(seen)
+        seen.update(options)
+        queue.push_all(idx + 1, options)
     return min_steps
 
 
 def part1(test):
-    b = None
     if test:
-        # b.floors[0] = {('hydrogen', 'M'), ('lithium', 'M')}  # M = microchip
-        # b.floors[1] = {('hydrogen', 'G')}  # G = Generator
-        # b.floors[2] = {('lithium', 'G')}
-
-        # b = Building(steps=0, elev=0, gens={
-        #     'hydrogen': 1,
-        #     'lithium': 2
-        # }, mics={
-        #     'hydrogen': 0,
-        #     'lithium': 0,
-        # })
-        b = Building(steps=0, elev=0, gens=(1, 2), mics=(0, 0))
+        b = Building(elev=0, pos=(
+            (1, 0),
+            (2, 0)
+        ))
     else:
-        # pass
-        # b.floors[0] = {
-        #     ('polonium', 'G'),
-        #     ('thulium', 'G'),
-        #     ('thulium', 'M'),
-        #     ('promethium', 'G'),
-        #     ('ruthenium', 'G'),
-        #     ('ruthenium', 'M'),
-        #     ('cobalt', 'G'),
-        #     ('cobalt', 'M')
-        # }
-        # b.floors[1] = {
-        #     ('polonium', 'M'),
-        #     ('promethium', 'M'),
-        # }
-
-        b = Building(steps=0, elev=0, gens=(0, 0, 0, 0, 0), mics=(1, 0, 1, 0, 0))
+        b = Building(elev=0, pos=(
+            (0, 1),
+            (0, 0),
+            (0, 1),
+            (0, 0),
+            (0, 0)
+        ))
 
     return runner(b)
 
 
 def part2():
-    b = Building(steps=0, elev=0, gens=(0, 0, 0, 0, 0, 0, 0), mics=(1, 0, 1, 0, 0, 0, 0))
+    b = Building(elev=0, pos=(
+        (0, 1),
+        (0, 0),
+        (0, 1),
+        (0, 0),
+        (0, 0),
+        (0, 0),
+        (0, 0),
+    ))
     return runner(b)
 
 
