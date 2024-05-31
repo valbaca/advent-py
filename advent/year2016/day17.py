@@ -1,4 +1,3 @@
-from collections import namedtuple
 from dataclasses import dataclass
 from functools import lru_cache
 from heapq import heappush, heappop
@@ -46,8 +45,10 @@ class Loc:
             steps.append(Loc(self.x + 1, self.y, self.path + "R"))
         return steps
 
+
 def is_open(c):
     return c in "bcdef"
+
 
 def part1(passcode, invert=False):
     ans = None
@@ -64,6 +65,7 @@ def part1(passcode, invert=False):
                 priority = len(next_step.path) * (-1 if invert else 1)
                 heappush(q, (priority, next_step))
     return ans
+
 
 def part2(passcode):
     return len(part1(passcode, invert=True))

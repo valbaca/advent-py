@@ -51,6 +51,7 @@ class Swarm:
         else:
             self.parse_instructions(line)
 
+
 def part1(lines):
     swarm = Swarm()
     for line in lines:
@@ -62,6 +63,7 @@ def part1(lines):
     for bot_id, values in swarm.bots.items():
         if 61 in values and 17 in values:
             return bot_id
+
 
 def part2(lines):
     swarm = Swarm()
