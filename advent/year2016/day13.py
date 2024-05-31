@@ -9,26 +9,6 @@ def main():
     print("Part 2:", part2())
 
 
-class RadixQueue:
-    def __init__(self):
-        self.queue = [[]]
-
-    def first_with_item(self):
-        for idx, arr in enumerate(self.queue):
-            if len(arr) > 0:
-                return idx, arr
-        return None, None
-
-    def is_empty(self):
-        return self.first_with_item() == (None, None)
-
-    def push_all(self, index, items):
-        while len(self.queue) <= index:
-            self.queue.append([])
-        for item in items:
-            heapq.heappush(self.queue[index], item)
-
-
 @lru_cache
 def is_wall(fav, x, y):
     sm = x * x + 3 * x + 2 * x * y + y + y * y + fav
@@ -41,8 +21,8 @@ def distance(a, b):
 
 def runner(target, fav, max_steps=None):
     init = (1, 1)
-    q = RadixQueue()
-    q.push_all(0, [(distance(target, init), init)])
+    q = []
+    heapq.heappush(q, (0, (distance(target, init), init)))
     seen = set()
     seen.add(init)
 
@@ -55,14 +35,12 @@ def runner(target, fav, max_steps=None):
         if is_wall(fav, x, y):
             return
         seen.add(coor)
-        q.push_all(steps, [(distance(target, coor), coor)])
+        heapq.heappush(q, (steps, (distance(target, coor), coor)))
 
-    while not q.is_empty():
-        steps, arr = q.first_with_item()
+    while q:
+        steps, (dist, coor) = heapq.heappop(q)
         if max_steps and steps >= max_steps:
             return len(seen)
-        popped = heapq.heappop(arr)
-        dist, coor = popped
 
         if coor == target:
             return steps

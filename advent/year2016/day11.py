@@ -1,6 +1,8 @@
+import heapq
 import math
 import time
 from dataclasses import dataclass
+from functools import cached_property
 
 """
 FINALLY got this to run in less than a second.
@@ -15,8 +17,6 @@ herring; the names don't matter. So ((0,2), (1,2)) == ((1,2), (0,2)). This allow
 sorting the position tuple, so ((1,2), (0,2)) becomes ((0,2), (1,2)) and now the set is even more useful!
 3. Finally, avoid poor "steps". As in avoid moving just one thing up a floor when you could move two or moving two 
 things down, or moving *anything* down if it's unnecessary.
-4. Using my "Radix Queue" I'm able to both keep track of the # of steps easily AND ensure I find the optimal solution.
-It greatly helps that the value we're optimizing (steps) is only ever increasing, so we never have to go back.
 
 #1 above is the most important, as it enables the rest.
 
@@ -125,39 +125,21 @@ class Building:
             mics_by_floor[mic_f].add(idx)
         return gens_by_floor, mics_by_floor
 
+    @cached_property
+    def score(self):
+        return -1 * sum([self.elev + sum(a + b for a, b in self.pos)])
 
-class RadixQueue:
-    """Rather than using a heap, using a list where the index is the # of steps a building takes.
-    This ensures we're working on the fastest solutions and can pull the next immediately"""
-
-    def __init__(self):
-        self.queue = [[]]
-
-    def first_with_item(self):
-        for idx, arr in enumerate(self.queue):
-            if len(arr) > 0:
-                return idx, arr
-        return None, None
-
-    def is_empty(self):
-        return self.first_with_item() == (None, None)
-
-    def push_all(self, index, items):
-        while len(self.queue) <= index:
-            self.queue.append([])
-        self.queue[index].extend(items)
+    def __lt__(self, other):
+        return self.score < other.score
 
 
 def runner(init):
     init = init.normalize()
-    queue = RadixQueue()
-    queue.push_all(0, [init])
+    queue = [(0, init)]
     seen = {init}
     min_steps = math.inf
-    while not queue.is_empty():
-        idx, arr = queue.first_with_item()
-        b = arr.pop()
-        # b = queue.pop()
+    while queue:
+        idx, b = heapq.heappop(queue)
         if min_steps <= idx:
             continue
         if b.solved():
@@ -166,7 +148,8 @@ def runner(init):
             continue
         options = b.generate_options(seen)
         seen.update(options)
-        queue.push_all(idx + 1, options)
+        queue.extend((idx + 1, option) for option in options)
+        heapq.heapify(queue)
     return min_steps
 
 
