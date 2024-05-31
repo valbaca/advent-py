@@ -4,6 +4,34 @@ Advent of Code problems solved in Python
 
 - [Advent of Code](https://adventofcode.com/)
 
+## Install/Setup
+
+Yes, Python package management is a mess. Here's what I use:
+
+1. Install and setup Python 3.10. I prefer using [pyenv](https://github.com/pyenv/pyenv) to manage Python itself. I also prefer [PyPy](https://www.pypy.org/) as the actual Python runtime; it's just faster.
+```shell
+pyenv install pypy3.10-7.3.16 # for example
+```
+
+2. Setup and activate your python `virtualenv`. I prefer using [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
+```shell
+pyenv virtualenv pypy3.10-7.3.16 advent-py
+cd <this repo>
+pyenv activate advent-py
+```
+
+3. Install [pip-tools](https://github.com/jazzband/pip-tools), which help manage dependencies through requirements.in (simple names) and requirements.txt (exact versions)
+```shell
+pip install pip-tools
+pip-sync # pulls the specific versions specified in requirements.txt
+```
+
+### Add Dependencies
+
+1. Update `requirements.in`
+2. Run `pip-compile` (which comes from pip-tools, mentioned above)
+
+
 ## Running
 
 ```shell
@@ -43,7 +71,7 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 - Year 2015: 🎄 DONE! [advent/year2015](advent/year2015)
   - Also solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go) and Clojure [valbaca/advent](https://github.com/valbaca/advent)
 - Year 2016: 🎄 DONE!
-  - Days 1-15, 19, 22-25 in Python here: [advent/year2016](advent/year2016)
+  - Days 1-16, 19, 22-25 in Python here: [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
 - Year 2017: ❄️ On ice.
 - Year 2018: ❄️ On ice.
