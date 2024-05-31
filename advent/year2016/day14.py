@@ -1,5 +1,6 @@
-import hashlib
 from collections import deque
+
+from advent.elf import md5
 
 
 def main():
@@ -9,10 +10,6 @@ def main():
     # lines = elf.read_lines(__file__)
     print("Part 1:", part1("yjdafjpo"))
     print("Part 2:", part2("yjdafjpo"))
-
-
-def md5(s):
-    return hashlib.md5(s).hexdigest()
 
 
 def get_triplet(s):
@@ -33,7 +30,7 @@ def get_quints(s):
 def calc(salt, i, hash_n):
     hash = (salt + str(i))
     for _ in range(hash_n):
-        hash = md5(hash.encode("utf-8"))
+        hash = md5(hash)
     triplet = get_triplet(hash)
     quints = get_quints(hash)
     return hash, triplet, quints

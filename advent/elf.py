@@ -1,4 +1,5 @@
 import bisect
+import hashlib
 import re
 from functools import reduce
 from math import inf
@@ -262,6 +263,9 @@ def between(x, x1, x2):
     If you want ordered, just use x1 <= x <= x2"""
     return x1 <= x <= x2 or x2 <= x <= x1
 
+
+def md5(s):
+    return hashlib.md5(s.encode("utf-8")).hexdigest()
 
 # Numpy related
 

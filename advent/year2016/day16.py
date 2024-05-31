@@ -1,22 +1,20 @@
+import time
+
 from more_itertools import chunked
 
 
 def main():
-    # test_lines = elf.read_lines(__file__, test=True)
-    # print("Part 1 (test):", part1(test_lines))
-    #
-    # lines = elf.read_lines(__file__)
     print("Part 1:", part1())
+    start = time.time()
     print("Part 2:", part2())
+    end = time.time()
+    print(f"{end - start:.2f}s")
 
 
-def dragon(input, length):
-    s = input
+def dragon(s, length):
     while len(s) < length:
-        a = s
-        b = reversed(s)
-        b = "".join(['0' if c == '1' else '1' for c in b])
-        s = f"{a}0{b}"
+        b = "".join([{'0': '1', '1': '0'}[c] for c in s[::-1]])
+        s = f"{s}0{b}"
     return s[:length]
 
 
