@@ -149,6 +149,7 @@ def all_around(grid, row, col, df=1):
 
 
 def all_values_around(grid, row, col, df=1):
+    """Return values of all items around row, col in grid (including diagonals) but not grid[row][col] itself"""
     return [grid[r][c] for r, c in all_around(grid, row, col, df)]
 
 
