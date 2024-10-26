@@ -96,6 +96,7 @@ def part1(lines):
     # return parse_int_list(lines)
 
 
+# FIXME
 def part2(lines):
     # lines = ["5-8", "0-2", "4-7"]
     pairs = [elf.septoi(line, '-') for line in lines]

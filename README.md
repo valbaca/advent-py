@@ -4,40 +4,31 @@ Advent of Code problems solved in Python
 
 - [Advent of Code](https://adventofcode.com/)
 
-## Install/Setup
+## Install/Setup: (mise, venv, pip, pip-tools)
 
-Yes, Python package management is a mess. Here's what I use:
+1. I recommend [mise](https://mise.jdx.dev/) to install Python >= 3.12
+  - Install: `mise install python@<version>`
+  - (Optional) Use a specific Python version within this project: `mise use python@<version>`
+2. Once, within the project, create a venv: `python -m venv --prompt advent-pypy .venv`
+3. Activate it each session: `source .venv/bin/activate`
+4. Use [pip-tools](https://pip-tools.readthedocs.io/en/stable/) 
+   1. `pip install pip-tools`
+   2. `pip-compile`
+   3. `pip-sync`
 
-1. Install and setup Python 3.10. I prefer using [pyenv](https://github.com/pyenv/pyenv) to manage Python itself. I also prefer [PyPy](https://www.pypy.org/) as the actual Python runtime; it's just faster.
-```shell
-pyenv install pypy3.10-7.3.16 # for example
-```
-
-2. Setup and activate your python `virtualenv`. I prefer using [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
-```shell
-pyenv virtualenv pypy3.10-7.3.16 advent-py
-cd <this repo>
-pyenv activate advent-py
-```
-
-3. Install [pip-tools](https://github.com/jazzband/pip-tools), which help manage dependencies through requirements.in (simple names) and requirements.txt (exact versions)
-```shell
-pip install pip-tools
-pip-sync # pulls the specific versions specified in requirements.txt
-```
-
-### Add Dependencies
-
-1. Update `requirements.in`
-2. Run `pip-compile` (which comes from pip-tools, mentioned above)
-
+Alternative: manage your Python versions with [pyenv](https://github.com/pyenv/pyenv)  and your virtualenvs with [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
 
 ## Running
+
+Simply run a day's file from within PyCharm.
+
+OR
 
 ```shell
 # from the project root:
 $ export PYTHONPATH=.
-$ python advent/year2020/day1.py # or run open file from within VS Code
+# then run the actual file
+$ python advent/year2020/day1.py
 <part 1 answer>
 <part 2 answer>
 ```
@@ -79,3 +70,4 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 - Year 2020: 🎄 DONE! [advent/year2020](advent/year2020)
 - Year 2021: 🎄 DONE! [advent/year2021](advent/year2021)
 - Year 2022: 🎄 DONE in Kotlin [valbaca/advent-kt](https://github.com/valbaca/advent-kt)
+- Year 2023: 🎁 IN PROGRESS here: [advent/year2023](advent/year2023)
