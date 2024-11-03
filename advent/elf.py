@@ -197,6 +197,9 @@ def product(xs):
 def clamp(n, lo, hi):
     return max(lo, min(n, hi))
 
+def mv(start, diff):
+    return start[0]+diff[0], start[1]+diff[1]
+
 
 # Stealing from:
 # https://math.stackexchange.com/questions/2218763/how-to-find-lcm-of-two-numbers-when-one-starts-with-an-offset
