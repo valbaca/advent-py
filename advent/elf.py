@@ -179,6 +179,24 @@ def transpose(m):
     else:
         return [[m[r][c] for r in range(rc)] for c in range(cc)]
 
+def get(g, rc, c=None):
+    """
+    Given a grid, row-column tuple OR grid, row, col...
+    returns the value at the coordinates OR returns None if out of bounds
+    """
+    r = None
+    if type(rc) is int:
+        if c is None:
+            raise TypeError("Expected c to be non-None if r is int")
+        r = rc
+    if type(rc) is tuple and c is None:
+        r,c = rc
+    if r is None:
+        raise Exception("Expected r to be non-None if r is int")
+    if 0 <= r < len(g) and 0 <= c < len(g[r]):
+        return g[r][c]
+    else:
+        return None
 
 # Math
 
