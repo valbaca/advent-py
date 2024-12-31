@@ -179,6 +179,7 @@ def transpose(m):
     else:
         return [[m[r][c] for r in range(rc)] for c in range(cc)]
 
+
 def get(g, rc, c=None):
     """
     Given a grid, row-column tuple OR grid, row, col...
@@ -190,13 +191,14 @@ def get(g, rc, c=None):
             raise TypeError("Expected c to be non-None if r is int")
         r = rc
     if type(rc) is tuple and c is None:
-        r,c = rc
+        r, c = rc
     if r is None:
         raise Exception("Expected r to be non-None if r is int")
     if 0 <= r < len(g) and 0 <= c < len(g[r]):
         return g[r][c]
     else:
         return None
+
 
 # Math
 
@@ -215,8 +217,62 @@ def product(xs):
 def clamp(n, lo, hi):
     return max(lo, min(n, hi))
 
+
+# Tuples...(though probably just use numpy?)
+
 def mv(start, diff):
-    return start[0]+diff[0], start[1]+diff[1]
+    return start[0] + diff[0], start[1] + diff[1]
+
+def ad(a, b):
+    """Add, for pair"""
+    if type(b) is tuple or type(b) is list:
+        return a[0] + b[0], a[1] + b[1]
+    return a[0] + b, a[1] + b
+
+def sb(a, b):
+    """Subtract, for pair"""
+    if type(b) is tuple or type(b) is list:
+        return a[0] - b[0], a[1] - b[1]
+    return a[0] - b, a[1] - b
+
+
+def ml(a, b):
+    """Multiply, for pair"""
+    if type(b) is tuple or type(b) is list:
+        return a[0] * b[0], a[1] * b[1]
+    return a[0] * b, a[1] * b
+
+
+def dv(a, b):
+    """Divide, for pair"""
+    if type(b) is tuple or type(b) is list:
+        return a[0] // b[0], a[1] // b[1]
+    return a[0] // b, a[1] // b
+
+
+def md(a, b):
+    """Mod % for pair"""
+    if type(b) is tuple or type(b) is list:
+        return a[0] % b[0], a[1] % b[1]
+    return a[0] % b, a[1] % b
+
+
+def dm(a, b):
+    """divmod for pair"""
+    if type(b) is tuple or type(b) is list:
+        return divmod(a[0], b[0]), divmod(a[1], b[1])
+
+    return divmod(a[0], b), divmod(a[1], b)
+
+
+def is_even_div(a, b):
+    """Return whether pair a is evenly/perfectly divisible by b, which can be a pair or scalar"""
+    if type(b) is tuple or type(b) is list:
+        dmx = divmod(a[0], b[0])  # div, mod
+        return dmx[1] == 0 and dmx == divmod(a[1], b[1])
+    else:
+        dmx = divmod(a[0], b)
+        return dmx[1] == 0 and dmx == divmod(a[1], b)
 
 
 # Stealing from:
@@ -289,8 +345,10 @@ def between(x, x1, x2):
 def md5(s):
     return hashlib.md5(s.encode("utf-8")).hexdigest()
 
+
 def cmp(a, b):
     return (a > b) - (a < b)
+
 
 # Numpy related
 
