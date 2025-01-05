@@ -9,6 +9,18 @@ from typing import AnyStr, Pattern, List
 An elf is Santa's little helper, so elf.py has helper functions!
 """
 
+N = (-1, 0)
+E = (0, 1)
+S = (1, 0)
+W = (0, -1)
+DIRS = [N, E, S, W]
+def clockwise(dir, n=1):
+    i = DIRS.index(dir)
+    return DIRS[(i+n) % len(DIRS)]
+
+def counterclockwise(dir, n=1):
+    i = DIRS.index(dir)
+    return DIRS[(i-n) % len(DIRS)]
 
 # IO-related
 
@@ -118,6 +130,9 @@ def bisect_index(arr, n):
 
 # Grids / Matricies
 
+def to_grid(lines):
+    return [list(line) for line in lines]
+
 def around_values(grid, r, c):
     """Return the values up/down/left/right; not diagonals"""
     return [grid[rd][cd] for rd, cd in around_indexes(grid, r, c)]
@@ -165,6 +180,10 @@ def iter_grid_values(grid):
 def iter_grid_indexes(grid):
     """Gives [rowi, coli] index pairs for grid"""
     return [[r, c] for r in range(len(grid)) for c in range(len(grid[r]))]
+
+def iter_grid(grid):
+    """Gives [rowi, coli, value] for grid"""
+    return [[r,c,v] for r in range(len(grid)) for c, v in enumerate(grid[r])]
 
 
 def transpose(m):
