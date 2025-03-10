@@ -2,6 +2,8 @@
 *.txt
 # but we need python stuff
 !requirements.txt
+# I use mise but you don't have to
+mise.toml
 
 
 # Byte-compiled / optimized / DLL files

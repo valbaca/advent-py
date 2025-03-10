@@ -25,6 +25,14 @@ Simply run a day's file from within PyCharm.
 OR
 
 ```shell
+python -m advent.year<year>.day<day>
+# such as:
+python -m advent.year2024.day19
+```
+
+OR
+
+```shell
 # from the project root:
 $ export PYTHONPATH=.
 # then run the actual file
