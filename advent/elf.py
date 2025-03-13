@@ -387,3 +387,36 @@ def lines_to_np_array(lines):
         array[i, :len(line)] = list(line)
 
     return array
+
+
+# Algorithms
+
+class Dijkstra:
+    def __init__(self, grid):
+        self.grid = grid
+
+    def dijkstra(self, start):
+        # start_vertex = self.vertex_data.index(start_vertex_data)
+        distances = [[inf] * len(self.grid) for _ in range(len(self.grid))]
+        distances[start[0]][start[1]] = 0
+        visited = [[False] * len(self.grid) for _ in range(len(self.grid))]
+
+        for _, _ in iter_grid_indexes(self.grid):
+            min_distance = inf
+
+            u = None  # the node we inspect next...
+            for r, c in iter_grid_indexes(self.grid):
+                if not visited[r][c] and distances[r][c] < min_distance:
+                    min_distance = distances[r][c]
+                    u = r, c
+            if u is None:
+                break
+
+            visited[u[0]][u[1]] = True
+
+            for r, c in around_indexes(self.grid, u[0], u[1]):
+                if self.grid[r][c] != '#' and not visited[r][c]:
+                    alt = distances[u[0]][u[1]] + 1
+                    if alt < distances[r][c]:
+                        distances[r][c] = alt
+        return distances
