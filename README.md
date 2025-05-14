@@ -78,4 +78,5 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 - Year 2020: 🎄 DONE! [advent/year2020](advent/year2020)
 - Year 2021: 🎄 DONE! [advent/year2021](advent/year2021)
 - Year 2022: 🎄 DONE in Kotlin [valbaca/advent-kt](https://github.com/valbaca/advent-kt)
-- Year 2023: 🎁 IN PROGRESS here: [advent/year2023](advent/year2023)
+- Year 2023: 🎁 IN PROGRESS 20/25 complete here: [advent/year2023](advent/year2023)
+- Year 2024: 🎁 IN PROGRESS 23/25 complete here: [advent/year2024](advent/year2024)
