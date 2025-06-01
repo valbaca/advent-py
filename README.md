@@ -43,6 +43,29 @@ $ python advent/year2020/day1.py
 
 Just simple scripts: Each day's script runs solo (no top-level runner) and reads input from a .txt file with the same prefix in the same directory. For example `day1.py` reads `day1.txt` from within the same directory.
 
+### Running: VS Code
+
+```json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        }
+    ]
+}
+```
+
 ## What's interesting?
 
 - What's Advent of Code?
@@ -69,8 +92,7 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 
 - Year 2015: 🎄 DONE! [advent/year2015](advent/year2015)
   - Also solved in Go [valbaca/advent-go](https://github.com/valbaca/advent-go) and Clojure [valbaca/advent](https://github.com/valbaca/advent)
-- Year 2016: 🎄 DONE!
-  - Days 1-19, 22-25 in Python here: [advent/year2016](advent/year2016)
+- Year 2016: 🎄 DONE! [advent/year2016](advent/year2016)
   - Days 8-18 in Java: [github.com/valbaca/advent](https://github.com/valbaca/advent)
 - Year 2017: ❄️ On ice.
 - Year 2018: ❄️ On ice.
