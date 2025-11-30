@@ -1,0 +1,13 @@
+[project]
+name = "advent-py"
+version = "0.1.0"
+description = "Advent of Code solutions by valbaca"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "boltons>=25.0.0",
+    "more-itertools>=10.8.0",
+    "networkx>=3.6",
+    "numpy>=2.3.5",
+    "pyyaml>=6.0.3",
+]

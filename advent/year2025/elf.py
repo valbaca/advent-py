@@ -7,8 +7,6 @@ from typing import AnyStr, Pattern, List
 
 """
 An elf is Santa's little helper, so elf.py has helper functions!
-NOTE: This is for pre-2025. Consider this "pre-2025 elf.py"
-For 2025 (and later?), each year has its own elf to simplify running individual days.
 """
 
 N = (-1, 0)

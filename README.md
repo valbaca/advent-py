@@ -19,6 +19,11 @@ Advent of Code problems solved in Python
 Alternative: manage your Python versions with [pyenv](https://github.com/pyenv/pyenv)  and your virtualenvs with [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
 
 ## Running
+For 2025+, simply run the day's script.
+
+Prior to 2025, the helper "elf.py" script needed to be in the PYTHONPATH. See below
+
+### Running before 2025
 
 Simply run a day's file from within PyCharm.
 
@@ -102,3 +107,4 @@ Just simple scripts: Each day's script runs solo (no top-level runner) and reads
 - Year 2022: 🎄 DONE in Kotlin [valbaca/advent-kt](https://github.com/valbaca/advent-kt)
 - Year 2023: 🎁 IN PROGRESS 20/25 complete here: [advent/year2023](advent/year2023)
 - Year 2024: 🎁 IN PROGRESS 23/25 complete here: [advent/year2024](advent/year2024)
+- Year 2025: 🎅 COMING SOON! here: [advent/year2025](advent/year205)
